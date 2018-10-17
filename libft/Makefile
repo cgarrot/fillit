@@ -6,7 +6,7 @@
 #    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/02 13:53:57 by thbrouss     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/09 17:46:01 by thbrouss    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/17 12:31:02 by thbrouss    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -19,7 +19,7 @@ NAME=libft.a
 
 FLAGS=-Wall -Werror -Wextra
 
-INCLUDE=libft.h
+INCLUDE=../includes/libft.h
 
 FILE=ft_atoi\
 ft_bzero\
@@ -79,6 +79,7 @@ ft_strsub\
 ft_strtrim\
 ft_tolower\
 ft_toupper\
+ft_realloc
 
 SRC=$(addsuffix .c, $(FILE))
 
@@ -87,14 +88,14 @@ OBJ=$(addsuffix .o, $(FILE))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		ar rcs $(NAME) $(OBJ)
+		@ar rcs $(NAME) $(OBJ)
 
-%.o: %.c libft.h
-		$(CC) $(FLAGS) -o $@ -c $< -I $(INCLUDE)
+%.o: %.c ../includes/libft.h
+		@$(CC) $(FLAGS) -o $@ -c $< -I $(INCLUDE)
 
 clean:
-		rm -f $(OBJ)
+		@rm -f $(OBJ)
 fclean: clean
-		rm -f $(NAME)
+		@rm -f $(NAME)
 
 re:	fclean all

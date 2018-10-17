@@ -6,7 +6,7 @@
 #    By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/10 19:59:22 by cgarrot      #+#   ##    ##    #+#        #
-#    Updated: 2018/10/16 18:31:07 by thbrouss    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/17 19:41:40 by thbrouss    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -14,30 +14,40 @@
 .PHONY: all clean fclean re
 
 NAME = fillit
+MAKE=make
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-INC = ./libft
+INCLUDE = ./includes
 
 #------------------------------------FILE--------------------------------------#
 
 FILES = parse_input\
+get_next_line
 
 #----------------------------------SOURCE--------------------------------------#
 
-SRC = $(addsuffix .c , $(FILES))
+SRC = $(addsuffix .c, $(FILES))
+
+#----------------------------------OBJECT--------------------------------------#
+
+OBJ= $(addsuffix .o, $(FILES))
 
 #-----------------------------------RULE---------------------------------------#
 
 all: $(NAME)
 
-$(NAME): $(INC)
+$(NAME): $(OBJ)
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@echo "\033[1m|-------Compilation du prog-------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@echo "\033[1m|---------Creation du prog--------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
-	@$(CC) $(FLAGS) -o $(NAME) -I $(INC)
+	@+$(MAKE) -C libft/
+	@$(CC) $(FLAGS) -o $(NAME) $(SRC) -I$(INCLUDE) -L libft/ -lft
+
+%.o: %.c
+	@$(CC) $(FLAGS) -o $@ -c $< -I $(INCLUDE)
 
 clean:
 	@echo "\033[1m|---------------------------------|\033[0m"
