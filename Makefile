@@ -6,7 +6,7 @@
 #    By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/10 19:59:22 by cgarrot      #+#   ##    ##    #+#        #
-#    Updated: 2018/10/17 19:41:40 by thbrouss    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/17 20:19:56 by thbrouss    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -36,6 +36,10 @@ OBJ= $(addsuffix .o, $(FILES))
 
 all: $(NAME)
 
+debug:
+	@+$(MAKE) -C libft/
+	@$(CC) $(FLAGS) -o $(NAME) -g $(SRC) -I$(INCLUDE) -L libft/ -lft
+
 $(NAME): $(OBJ)
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@echo "\033[1m|-------Compilation du prog-------|\033[0m"
@@ -44,10 +48,10 @@ $(NAME): $(OBJ)
 	@echo "\033[1m|---------Creation du prog--------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@+$(MAKE) -C libft/
-	@$(CC) $(FLAGS) -o $(NAME) $(SRC) -I$(INCLUDE) -L libft/ -lft
+	@$(CC) $(FLAGS) -o $(NAME) $(SRC) -g -I$(INCLUDE) -L libft/ -lft
 
 %.o: %.c
-	@$(CC) $(FLAGS) -o $@ -c $< -I $(INCLUDE)
+	@$(CC) $(FLAGS) -o $@ -g -c $< -I $(INCLUDE)
 
 clean:
 	@echo "\033[1m|---------------------------------|\033[0m"
