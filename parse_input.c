@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/16 18:24:41 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/17 20:54:04 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/18 16:18:35 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,35 +23,35 @@ static void		store_input(char **files, char *line, int pos)
 
 	len = ft_strlen(line);
 	i = 0;
-	files[pos] = malloc(sizeof(char) * ft_strlen(line) + 1);
+	files[pos] = malloc(sizeof(char) * ft_strlen(line) + 2);
 	while (i < len)
 	{
 		files[pos][i] = line[i]; 
 		i++;
 	}
+
+	files[pos][i++] = '\n';
 	files[pos][i] = '\0';
-	//files[pos] = '\0';
-	printf("%s\n", files[pos]);
+	printf("%s", files[pos]);
 }
 
-static void		store_coords(char **files, int pos, t_tetri **tetri)
+static void		store_coords(char **files, int pos, t_tetri **tetri, char *line)
 {
 	int i;
 	int j;
-	int c_coords;
+	int len;
 
 	i = 0;
-	c_coords = 0;
+	len = ft_strlen(line);
 	while (i < pos)
 	{
 		j = 0;
-		while (j < 4)
+		while (j < len)
 		{	
 			if (files[pos][j] == '#')
 			{
 				tetri[i]->coords[j]->line = i;
 				tetri[i]->coords[j]->col = j;
-				c_coords++;
 			}
 			j++;
 		}	
@@ -66,7 +66,7 @@ int		check_error(int c_hash, char *line, int type)
 	{
 		ft_putstr("error\n");
 		return (0);
-	}else if (type == HASH_N && c_hash != 4)
+	}else if (type == HASH_N && c_hash > 4)
 	{	
 		ft_putstr("error\n");
 		return (0);
@@ -81,22 +81,18 @@ int		check_next_to(char **file, int pos)
 
 	c_con = 0;
 	i = 0;
-	while (file[pos][i])
+	while (i < 20)
 	{
 		if (file[pos][i] == '#')
 		{
-			if (pos + 1 < 5 || pos - 1 > 0)
-			{
 				if (file[pos - 1][i] == '#' || file[pos + 1][i] == '#')
 					c_con++;
-			}else if (i + 1 < 5 || i - 1 > 0)
-			{
 				if (file[pos][i + 1] == '#' || file[pos][i - 1] == '#')
 					c_con++;
-			}
-		}	
+		}
 		i++;
 	}
+	printf("%d", c_con);	
 	if (c_con == 6 || c_con == 8)
 		return (1);
 	return (0);	
@@ -122,38 +118,37 @@ int		parse_file(int fd, char **files, t_tetri **tetri)
 	int c_line;
 	int c_hash;
 	int c_total;
+	int i;
 
 	c_hash = 0;
+	i = 0;
 	c_line = 0;
 	c_total = 0;
 	while (get_next_line(fd, &line))
 	{
-		//printf("%s\n", line);
 		if (c_total > 26)
 			return (0);
-		//if (!check_error(c_hash, line, LINE_L))
-			//return (0);
+		if (!check_error(c_hash, line, LINE_L))
+			return (0);
 		c_hash += ft_strfind(line, '#');
-		//if (c_line == 4 && *line != '\n')
+		//if (c_line % 4 == 0 && line[0] != '\n')
 		//{
-			//printf("%s", line);
-			//return (0);
+		//printf("%s", line);
+		//return (0);
 		//}
 		store_input(files, line, c_total);
-		if (c_line == 4)
+		if (!(c_line % 5))
 		{
-			//if (c_line == 5 && c_hash != 4)
-				//return (0);
-			//if (!check_next_to(files, c_total)) 
-				//return (0);
+			printf("count line :%d, count total : %d -- line : %s\n", c_line, c_total, line);
+			if (!check_next_to(files, c_total))
+				return (0);
+			//printf("%d", c_line);
 			//if (!check_error(c_hash, line, HASH_N))
-				//return (0);
-			store_coords(files, c_total, tetri);
-			c_total++;
-			c_line = 0;
+			//return (0);
+			store_coords(files, c_total, tetri, line);
 			c_hash = 0;
+			c_total++;
 		}
-		//store_input(files, line, c_total);
 		c_line++;
 	}
 	return (1);	
