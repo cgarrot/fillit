@@ -6,28 +6,22 @@
 /*   By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/18 16:40:51 by cgarrot      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/18 17:54:39 by cgarrot     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/18 19:54:25 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-int		ft_check_patern(char **tab)
+#include <stdio.h>
+
+int		ft_check_patern(char *tab, int i)
 {
-	int	i;
-	int	j;
 	int	k;
 
-	i = 0;
 	k = 0;
 	while (tab[i])
 	{
-		j = 0;
-		while (tab[i][j])
-		{
-			if (tab[i][j] == '#')
-				k++;
-			j++;
-		}
+		if (tab[i] == '#')
+			k++;
 		i++;
 	}
 	if (k != 4)

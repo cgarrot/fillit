@@ -3,17 +3,14 @@
 #                                                               /              #
 #    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
-#    By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
+#    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
-#    Created: 2018/10/10 19:59:22 by cgarrot      #+#   ##    ##    #+#        #
-<<<<<<< HEAD
-#    Updated: 2018/10/18 16:24:51 by thbrouss    ###    #+. /#+    ###.fr      #
-=======
-#    Updated: 2018/10/18 15:25:14 by cgarrot     ###    #+. /#+    ###.fr      #
->>>>>>> 330fd2f4ee6d7fceaefac033242a905597fa527a
+#    Created: 2018/10/18 16:32:29 by thbrouss     #+#   ##    ##    #+#        #
+#    Updated: 2018/10/18 18:33:39 by thbrouss    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
+
 
 .PHONY: all clean fclean re
 
@@ -26,7 +23,7 @@ INCLUDE = ./includes
 #------------------------------------FILE--------------------------------------#
 
 FILES = parse_input\
-get_next_line
+detect_piece
 
 #----------------------------------SOURCE--------------------------------------#
 
@@ -40,11 +37,8 @@ OBJ= $(addsuffix .o, $(FILES))
 
 all: $(NAME)
 
-debug:
-	@+$(MAKE) -C libft/
-	@$(CC) $(FLAGS) -o $(NAME) -g $(SRC) -I$(INCLUDE) -L libft/ -lft
 
-$(NAME): $(OBJ)
+$(NAME): $(SRC)
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@echo "\033[1m|-------Compilation du prog-------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
@@ -52,7 +46,7 @@ $(NAME): $(OBJ)
 	@echo "\033[1m|---------Creation du prog--------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@+$(MAKE) -C libft/
-	@$(CC) $(FLAGS) -o $(NAME) $(SRC) -g -I$(INCLUDE) -L libft/ -lft
+	@$(CC) $(FLAGS) -o $(NAME) $(SRC) -I$(INCLUDE) -L libft/ -lft
 
 clean:
 	@echo "\033[1m|---------------------------------|\033[0m"
