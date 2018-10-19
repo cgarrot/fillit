@@ -6,7 +6,7 @@
 /*   By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 19:19:39 by cgarrot      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 19:19:51 by cgarrot     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/19 22:31:38 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,7 @@ char	**ft_memalloc2d(int size, int len)
 	int		i;
 
 	i = 0;
-	if (!(tab = ft_memalloc(size)))
+	if (!(tab = malloc(sizeof(char*) * size)))
 		return (0); 
 	while (size--)
 		if (!(tab[i++] = ft_memalloc(len)))

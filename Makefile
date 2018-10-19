@@ -6,7 +6,7 @@
 #    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/18 16:32:29 by thbrouss     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/19 19:11:30 by thbrouss    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/19 22:09:14 by cgarrot     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -25,6 +25,8 @@ INCLUDE = ./includes
 FILES = parse_input\
 main\
 check_error\
+letter\
+detect_piece
 
 #----------------------------------SOURCE--------------------------------------#
 
@@ -39,7 +41,7 @@ OBJ= $(addsuffix .o, $(FILES))
 all: $(NAME)
 
 
-$(NAME): $(SRC)
+$(NAME): $(SRC) $(INCLUDE)
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@echo "\033[1m|-------Compilation du prog-------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
