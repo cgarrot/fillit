@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_realloc.c                                     .::    .:/ .      .::   */
+/*   ft_strcount.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/16 05:03:04 by cgarrot      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 14:56:36 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/19 14:55:22 by thbrouss     #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/19 14:55:53 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	*ft_realloc(void *ptr, size_t size)
+int		ft_strcount(char *str, int c)
 {
-	char	*ptr2;
+	int count;
 
-	if (size != 0 && ptr)
+	count = 0;
+	while (*str)
 	{
-		if (!(ptr2 = malloc(1)))
-			return (0);
-		ft_memdel(&ptr);
-		return (ptr2);
+		if (*str == c)
+			count++;
+		str++;
 	}
-	if (!(ptr2 = malloc(size)))
-		return (0);
-	if (ptr)
-	{
-		ft_memcpy(ptr2, ptr, size);
-		ft_memdel(&ptr);
-	}
-	return (ptr2);
+	return (count);
 }
