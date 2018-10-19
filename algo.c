@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 15:45:48 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 20:21:44 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/19 21:12:29 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,6 +46,7 @@ void	clear_grid(char *file, char **grid, int x, int y)
 {
 	int i;
 	int len;
+	int j;
 	char *tab;
 
 	i = 0;
@@ -59,8 +60,11 @@ void	clear_grid(char *file, char **grid, int x, int y)
 	i = 0;
 	while (file[i])
 	{
-		if (file
-		tab[i] = 
+		if (file == '#')
+		{
+			tab[j] = i;
+			j++;
+		}	
 		i++;
 	}
 }
@@ -91,13 +95,16 @@ int		resolve_algo(char **file, int x, int y, char **grid)
 	// ET DECALE LA PIECE DE 1. JUSQU A TROUVE LA SOLUTION = CARRE. (racine(L * l) = entiere = 1 carre). 
 	// 3 ) PREMIER CARRE TROUVE EST LE BON.
 	// 4 ) DISPLAY CARRE EN CHECKANT FORME => LETTRE.
+	
+	// si on peut poser la piece de file dans le grid.
 	if (put_piece(file, x, y, grid))
 	{
+		// check si on peut poser la piece suivante du file, juste apres la piece du grid.
 		if (resolve_algo(file, x + 1, y, grid))
 			return (1);
 	}
+	// si peut pas poser la piece dans le grid, revient au grid avant la piece.
 	clear_grid(grid, file[x], y);
-	resolve_algo(file, x - 1, y, grid);
 }
 
 int		res_algo(char **file, int x, int y, char **grid)
