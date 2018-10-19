@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/17 13:11:53 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/18 18:56:27 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/19 11:49:33 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,7 +34,7 @@ int		ft_check_pa6_7(char **tab);
 
 # define LINE_L 0
 # define HASH_N 1
-# define BUFF_SIZE 25
+# define BUFF_SIZE 21
 
 
 
