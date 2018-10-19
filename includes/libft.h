@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/02 14:35:05 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/17 16:31:59 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/19 14:57:35 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,6 +73,7 @@ void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 char			*ft_itoa(int n);
 void			*ft_realloc(void *ptr, size_t size);
+int				ft_strcount(char *str, int c);
 
 typedef struct	s_list
 {

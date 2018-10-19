@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_realloc.c                                     .::    .:/ .      .::   */
+/*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/16 05:03:04 by cgarrot      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 14:56:36 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/19 14:57:52 by thbrouss     #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/19 15:10:51 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+#include "fillit.h"
 #include "libft.h"
 
-void	*ft_realloc(void *ptr, size_t size)
+int		main(int ac, char **av)
 {
-	char	*ptr2;
+	int		fd;
+	char	**files;
+	int		c_blocks;
 
-	if (size != 0 && ptr)
+	c_blocks = 0;
+	files = NULL;
+	if (ac != 2)
+		write(1, "usage /fillit [file]\n", 21);
+	else
 	{
-		if (!(ptr2 = malloc(1)))
+		fd = open(av[1], O_RDONLY);
+		if (fd < 0)
+		{
+			ft_putstr("error");
 			return (0);
-		ft_memdel(&ptr);
-		return (ptr2);
+		}
+		if (!parse_file(fd, files, &c_blocks))
+			ft_putstr("error\n");
 	}
-	if (!(ptr2 = malloc(size)))
-		return (0);
-	if (ptr)
-	{
-		ft_memcpy(ptr2, ptr, size);
-		ft_memdel(&ptr);
-	}
-	return (ptr2);
 }
