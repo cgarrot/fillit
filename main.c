@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 14:57:52 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 15:10:51 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/19 18:40:27 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,5 +34,6 @@ int		main(int ac, char **av)
 		}
 		if (!parse_file(fd, files, &c_blocks))
 			ft_putstr("error\n");
+		ft_putstr2d(ft_input_letter(c_blocks, ft_index(files)));
 	}
 }

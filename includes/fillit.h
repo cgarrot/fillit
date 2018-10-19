@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/17 13:11:53 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 18:29:56 by cgarrot     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/19 18:53:08 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <stdio.h>
 
 int		ft_check_patern(char *tab, int i);
 int		ft_check_pa1(char **tab);
@@ -29,6 +30,12 @@ int		check_len(char *file);
 int		check_next_to(char *file);
 int		check_error(char *file, char n_line);
 int		parse_file(int fd, char **files, int *c_blocks);
+void	ft_putstr2d(char **tab);
+char	**ft_memalloc2d(int size, int len);
+int		**ft_index(char **tab);
+char	*ft_search_and_replace(char *src, char c);
+char	*ft_search_string(int i);
+char	**ft_input_letter(int bloc, int **index);
 
 # define LINE_L 0
 # define HASH_N 1

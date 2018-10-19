@@ -6,7 +6,7 @@
 #    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/18 16:32:29 by thbrouss     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/19 15:03:52 by thbrouss    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/19 18:43:35 by cgarrot     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -25,7 +25,8 @@ INCLUDE = ./includes
 FILES = parse_input\
 detect_piece\
 main\
-check_error
+check_error\
+letter
 
 #----------------------------------SOURCE--------------------------------------#
 
@@ -48,7 +49,7 @@ $(NAME): $(SRC)
 	@echo "\033[1m|---------Creation du prog--------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@+$(MAKE) -C libft/
-	@$(CC) $(FLAGS) -o $(NAME) $(SRC) -I$(INCLUDE) -L libft/ -lft
+	@$(CC) $(FLAGS) -g -o $(NAME) $(SRC) -I$(INCLUDE) -L libft/ -lft
 
 clean:
 	@echo "\033[1m|---------------------------------|\033[0m"
