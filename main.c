@@ -6,13 +6,14 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 14:57:52 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 15:10:51 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/19 19:58:45 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
+#include <stdio.h>
 
 int		main(int ac, char **av)
 {
@@ -32,7 +33,10 @@ int		main(int ac, char **av)
 			ft_putstr("error");
 			return (0);
 		}
-		if (!parse_file(fd, files, &c_blocks))
+		if (!(files = parse_file(fd, &c_blocks)))
+		{
 			ft_putstr("error\n");
+			return (0);
+		}
 	}
 }

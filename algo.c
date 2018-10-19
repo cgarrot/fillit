@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 15:45:48 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 19:02:26 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/19 20:21:44 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ void	place_piece(char *file, char **grid)
 		
 }
 
-int		put_piece(char **file, int x, int y, char **grid)
+int		put_piece(char **file, int x, int y, char **grid, int a, int b)
 {
 	int i;
 
@@ -45,20 +45,24 @@ int		put_piece(char **file, int x, int y, char **grid)
 void	clear_grid(char *file, char **grid, int x, int y)
 {
 	int i;
-	int j;
-	int k;
+	int len;
+	char *tab;
 
 	i = 0;
-	while (grid[i])
+	len = 0;
+	while (file[i])
 	{
-		j = 0;
-		while (grid[i][j])
-		{
-			if (file[k] == grid[i][j] || file[k + 1] == grid[i + 1][j] || )
-			j++;
-		}
+		if (file[i] == '#')
+			len++;
+	}
+	tab = malloc(sizeof(int) * len);
+	i = 0;
+	while (file[i])
+	{
+		if (file
+		tab[i] = 
 		i++;
-	}	
+	}
 }
 
 void	init_grid(char **grid)
