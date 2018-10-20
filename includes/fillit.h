@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/17 13:11:53 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 19:56:47 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/20 19:18:23 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,21 +21,27 @@
 # include <stdio.h>
 
 int		ft_check_patern(char *tab, int i);
-int		ft_check_pa1(char **tab);
-int		ft_check_pa2(char **tab);
-int		ft_check_pa3(char **tab);
-int		ft_check_pa4_5(char **tab);
-int		ft_check_pa6_7(char **tab);
+int		ft_check_pa1(char *tab);
+int		ft_check_pa2(char *tab);
+int		ft_check_pa3(char *tab);
+int		ft_check_pa4_5(char *tab);
+int		ft_check_pa6_7(char *tab);
 int		check_len(char *file);
 int		check_next_to(char *file);
 int		check_error(char *file, char n_line);
 char	**parse_file(int fd, int *c_blocks);
 void	ft_putstr2d(char **tab);
 char	**ft_memalloc2d(int size, int len);
-int		**ft_index(char **tab);
+int		**ft_index(char *tab);
 char	*ft_search_and_replace(char *src, char c);
 char	*ft_search_string(int i);
 char	**ft_input_letter(int bloc, int **index);
+int		ft_strncmp2(const char *s1, const char *s2, size_t n);
+char	**ft_changetoletter(char **files);
+char	**ft_setgrid(int blocks);
+int		ft_sqrt(int nb);
+char	**ft_reduct(char **files);
+int		ft_check_all(char *tab);
 
 # define LINE_L 0
 # define HASH_N 1
