@@ -5,12 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/17 13:11:53 by thbrouss     #+#   ##    ##    #+#       */
-<<<<<<< HEAD
-/*   Updated: 2018/10/20 17:12:16 by thbrouss    ###    #+. /#+    ###.fr     */
-=======
-/*   Updated: 2018/10/20 19:18:23 by cgarrot     ###    #+. /#+    ###.fr     */
->>>>>>> fbae32649df2656b355e49a8313f15d39feb2ad7
+/*   Created: 2018/10/20 19:42:18 by thbrouss     #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/20 20:01:15 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,6 +50,8 @@ char	**ft_setgrid(int blocks);
 int		ft_sqrt(int nb);
 char	**ft_reduct(char **files);
 int		ft_check_all(char *tab);
+int		res_algo(char **file, int c_blocks);
+
 
 # define LINE_L 0
 # define HASH_N 1
