@@ -6,13 +6,36 @@
 /*   By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 19:19:39 by cgarrot      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 19:19:51 by cgarrot     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/20 17:35:26 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
+
+int		ft_strncmp2(const char *s1, const char *s2, size_t n)
+{
+	unsigned int i;
+	unsigned int j;
+	unsigned int tmp;
+
+	i = 0;
+	while (s1[i])
+	{
+		j = 0;
+		tmp = i;
+		while (s1[tmp] == s2[j])
+		{
+			tmp++;
+			j++;
+		}
+		if (j == n - 1)
+			return (0);
+		i++;
+	}
+	return (s1 - s2);
+}
 
 void	ft_putstr2d(char **tab)
 {
@@ -30,28 +53,38 @@ char	**ft_memalloc2d(int size, int len)
 	int		i;
 
 	i = 0;
-	if (!(tab = ft_memalloc(size)))
+	if (!(tab = malloc(sizeof(char*) * size + 1)))
 		return (0); 
 	while (size--)
-		if (!(tab[i++] = ft_memalloc(len)))
+	{
+		if (!(tab[i] = ft_memalloc(len + 1)))
 			return (0);
+		i++;
+	}
 	return (tab);
 }
 
-int		**ft_index(char **tab)
+int		**ft_index(char *tab)
 {
-	static int	*index[18];
+	static int	*index[19];
 	int			piece;
 	int			i;
 	static int	count = 0;
 
+	i = 0;
+	while (i < 19)
+	{
+		index[i] = malloc(sizeof(int) * 26);
+		i++;
+	}
 	if ((piece = ft_check_pa1(tab)) || (piece = ft_check_pa2(tab)) ||
 			(piece = ft_check_pa3(tab)) || (piece = ft_check_pa4_5(tab))
 			|| (piece = ft_check_pa6_7(tab)))
 	{
-		i = -1;
-		while (tab[piece - 1][i++] != 0)
-			tab[piece - 1][i] = count++;
+		i = 0;
+		while (index[piece - 1][i] != 0)
+			i++;
+		index[piece - 1][i] = count++;
 	}
 	return (index);
 }
