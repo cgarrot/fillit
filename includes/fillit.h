@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/17 13:11:53 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 19:56:47 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/20 17:12:16 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,14 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <stdio.h>
+
+
+// store les coordonnees du tetri [4 extremitees].... map[t_extre + new_cords] et check sur quel extrimites on peut poser le tris.
+
+typedef struct s_tetri
+{
+	int curr_pos[4];
+}	t_tetri;
 
 int		ft_check_patern(char *tab, int i);
 int		ft_check_pa1(char **tab);

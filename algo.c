@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 15:45:48 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/19 21:12:29 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/20 19:19:34 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,106 +15,217 @@
 #include "libft.h"
 
 
-void	place_piece(char *file, char **grid)
-{
-		
-}
-
-int		put_piece(char **file, int x, int y, char **grid, int a, int b)
+int 	calc_long(int k, char *piece)
 {
 	int i;
 
 	i = 0;
-	while (grid[i])
+	while (piece[i] != '\n' && piece[i] != '.')
+		i++;
+	if (k == i)
+		return (1);
+	return (0);
+}	
+
+char	*get_piece(char **file, int x)
+{
+	int y;
+	int len;
+	int i;
+	char *tetri;
+
+	len = 0;
+	y = 0;	
+	while (file[x][y])
 	{
-		j = 0;
-		while (grid[i][j])
+			
+		if (file[x][y] == '#')
 		{
-			if (grid[i][j] == '#' && (grid[i + 1][j] != '#' || grid[i - 1][j] != '#' || grid[i][j + 1] != '#' || grid[i][j - 1] != '#'))
+			len++;
+			// si y en a 1 en face, mets un point devant ou derriere en fonction de la pose de ceux qui ne sont pas en face.
+			while (file[x][y] == '#')
 			{
-				place_piece(file[x], grid, i);
-				return (1);
+				y++;
+				len++;
 			}
+			len++;
+		}
+		y++;
+	}
+	if (!(tetri = malloc(sizeof(char) * len + 1)))
+		return (0);
+	i = 0;
+	y = 0;
+	while (file[x][y])
+	{
+		if (file[x][y] == '#')
+		{
+			while (file[x][y] == '#')
+			{
+				tetri[i] = file[x][y];
+				i++;
+				y++;
+			}
+			tetri[i] = '\n';
+		}
+		y++;
+	}
+	tetri[i] = '\0';
+	return (tetri);	
+}
+
+
+
+int		*ft_putable(char **grid, char **file, int x)
+{
+	int x;
+	int y;
+	int coords[2];
+	int k;
+
+	x = 0;
+	while (grid[x])
+	{
+		y = 0;
+		while (grid[x][y])
+		{
+			if (grid[x][y] == '.')
+			{
+				k = y;
+				while (grid[x][k] == '.' && grid[x][k] != '#')
+					k++;
+				if (calc_long(k, get_piece(file, x)))
+				{
+					coords[0] = x;
+					coords[1] = y;
+					return (coords);
+				}
+			}	
 			y++;
 		}
 		x++;
 	}
-	return (0);	
-}
+	return (0);
+}	
 
-void	clear_grid(char *file, char **grid, int x, int y)
+void	ft_put(char **grid, char *file, char *coords, int x)
 {
-	int i;
-	int len;
-	int j;
-	char *tab;
+	// poser la piece a partir de la pose des coords (x, y).
+	int x;
+	int y;
+	char *piece;
 
-	i = 0;
-	len = 0;
-	while (file[i])
+	piece = get_piece(file, x);
+	x = coords[0];
+	while (grid[x])
 	{
-		if (file[i] == '#')
-			len++;
-	}
-	tab = malloc(sizeof(int) * len);
-	i = 0;
-	while (file[i])
-	{
-		if (file == '#')
+		y = coords[1];
+		while (grid[x][y])
 		{
-			tab[j] = i;
-			j++;
-		}	
-		i++;
+				
+			y++;
+		}
+		x++;
+	}	
+}
+
+void	clear_grid(char **grid, char *file, char *coords)
+{
+	int x;
+	int y;
+
+	x = coords[0];
+	while (grid[x])
+	{
+		y = coords[1];
+		while (grid[x][y])
+		{
+			
+			y++;
+		}
+		x++;
 	}
 }
 
-void	init_grid(char **grid)
+char	**init_grid(int size)
 {
 	int i;
+	int j;
+	char **grid;
 
-	if (!(grid = (char **)malloc(sizeof(char) * 30)))
+	if (!(grid = (char **)malloc(sizeof(char) * size + 1)))
 		return ;
 	i = 0;
-	while (i < 30)
+	while (i < size)
 	{
-		grid[i] = (char *)malloc(sizeof(char) * 30);
-		while (j < 30)
+		grid[i] = (char *)malloc(sizeof(char) * size + 1);
+		j = 0;
+		while (j < size)
 		{
 			grid[i][j] = '.';
 			j++;
 		}
 		i++;
 	}
+	return (grid);
 }
 
-int		resolve_algo(char **file, int x, int y, char **grid)
+int		resolve_algo(char **file, int x, char **grid, int size)
 {
 	// 1 ) STOCKER TAB ID FORME => 1 OU PLUSIEURS LETTRES.
-	// 2 ) SI ON PEUT PLACER LA PIECE, OK, SI LA PIECE NE PEUT PAS ETRE PLACE REVIENT EN ARRIERE(LA OU OK POUR LE PLACEMENT DE LA PIECE) 
-	// ET DECALE LA PIECE DE 1. JUSQU A TROUVE LA SOLUTION = CARRE. (racine(L * l) = entiere = 1 carre). 
+	// 2 )  PLACE LA PIECE EN HAUT A GAUCHE ET CHECK SI ON PEUT POSER LES PIECES SUIVANTES DANS CE CARRE, 
+	// SI ON PEUT PAS RETOURNE PIECE INI + 1 ET CHECK AVEC TOUTE LES PIECES.
+	// JUSQU AU REMPLISSEMENT DU CARRE. SI LE CARRE NE PEUT PAS ETRE REMPLI, AUGEMENTE LA SIZE.
 	// 3 ) PREMIER CARRE TROUVE EST LE BON.
 	// 4 ) DISPLAY CARRE EN CHECKANT FORME => LETTRE.
-	
+
 	// si on peut poser la piece de file dans le grid.
-	if (put_piece(file, x, y, grid))
+	int i;
+	int *coords;
+
+	i = 0;
+	while (i < size)
 	{
-		// check si on peut poser la piece suivante du file, juste apres la piece du grid.
-		if (resolve_algo(file, x + 1, y, grid))
-			return (1);
+		if ((coords = ft_putable(grid, file, x)))
+		{
+			ft_put(grid, file, coords, x);
+			// check si on peut poser la piece suivante du file, juste apres la piece du grid.
+			if (resolve_algo(file, x + 1, grid, size))
+				return (1);
+			else
+				clear_grid(grid, file[x], coords);
+		}
+		i++;
 	}
-	// si peut pas poser la piece dans le grid, revient au grid avant la piece.
-	clear_grid(grid, file[x], y);
+	// si peut pas poser la piece dans le grid, enleve la piece.
+	return (0);
 }
 
-int		res_algo(char **file, int x, int y, char **grid)
+int		next_sqrt(int n)
+{
+	int i;
+
+	i = 1;
+	while (i * i <= n)
+		i++;
+	return (i + 1 * i + 1);
+}
+
+int		res_algo(char **file, int x, int y)
 {
 	int x;
-	int y;
+	int size;
+	char **grid;
 
 	x = 0;
-	y = 0;
-	init_grid(grid);
-	resolve_algo(file, x, y, grid);
+	size = 16;
+	grid = init_grid(size);
+	while (!(resolve_algo(file, x, grid, pos, size)))
+	{
+		size = next_sqrt(size);
+		grid = init_grid(size);
+	}
+	//print_grid();
+	return (0);
 }
 
