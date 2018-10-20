@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 15:45:48 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/20 20:23:12 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/20 20:27:28 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -88,6 +88,8 @@ char	*get_piece(char **file, int x)
 		}
 		y++;
 	}
+	// TODO : AFFICHER DIFFERENTE FORME.
+	//printf("%s", tetri);
 	tetri[i] = '\0';
 	return (tetri);	
 }
@@ -221,7 +223,9 @@ int		resolve_algo(char **file, int x, char **grid, int size, int c_blocks)
 			ft_put(grid, file, coords, x);
 			// check si on peut poser la piece suivante du file, juste apres la piece du grid.
 			//print_grid(grid, size);
-			printf(" coords x : %d, coords y : %d", coords[0], coords[1]);
+			//printf(" coords x : %d, coords y : %d", coords[0], coords[1]);
+			// TODO : FIXE GET PIECE + COORDS !
+			// 
 			if (resolve_algo(file, x + 1, grid, size, c_blocks))
 				return (1);
 			else
