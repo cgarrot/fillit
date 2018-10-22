@@ -6,7 +6,7 @@
 #    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/18 16:32:29 by thbrouss     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/20 19:37:46 by thbrouss    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/22 17:45:49 by thbrouss    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -25,9 +25,7 @@ INCLUDE = ./includes
 FILES = parse_input\
 main\
 check_error\
-letter\
 detect_piece\
-test\
 algo
 
 #----------------------------------SOURCE--------------------------------------#
