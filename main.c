@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 14:57:52 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/22 19:09:24 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/22 19:21:04 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,11 +69,11 @@ int		main(int ac, char **av)
 			return (0);
 		}
 		print_tab(files);
-		while (i < 26)
+		/*while (i < 26)
 		{
 			printf("%d\n", ft_check_all(files[i]));
 			i++;
-		}
+		}*/
 		//res_algo(files, c_blocks);
 	}
 }
