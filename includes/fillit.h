@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/20 19:42:18 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/20 20:01:15 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/22 16:41:06 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,12 +28,12 @@ typedef struct s_tetri
 	int curr_pos[4];
 }	t_tetri;
 
-int		ft_check_patern(char *tab, int i);
-int		ft_check_pa1(char *tab);
-int		ft_check_pa2(char *tab);
-int		ft_check_pa3(char *tab);
-int		ft_check_pa4_5(char *tab);
-int		ft_check_pa6_7(char *tab);
+int		ft_check_patern(char **tab, int i);
+int		ft_check_pa1(char **tab);
+int		ft_check_pa2(char **tab);
+int		ft_check_pa3(char **tab);
+int		ft_check_pa4_5(char **tab);
+int		ft_check_pa6_7(char **tab);
 int		check_len(char *file);
 int		check_next_to(char *file);
 int		check_error(char *file, char n_line);
@@ -49,13 +49,16 @@ char	**ft_changetoletter(char **files);
 char	**ft_setgrid(int blocks);
 int		ft_sqrt(int nb);
 char	**ft_reduct(char **files);
-int		ft_check_all(char *tab);
+int		ft_check_all(char **tab);
 int		res_algo(char **file, int c_blocks);
+char	**tab2d(char **files, int blocks);
+int		ft_new_line(char **s, char **line, int fd, int ret);
+int		get_next_line(const int fd, char **line);
 
 
 # define LINE_L 0
 # define HASH_N 1
-# define BUFF_SIZE 21
+# define BUFF_SIZE 26
 
 # define P1 1
 # define P1_DISP "###\n..#"

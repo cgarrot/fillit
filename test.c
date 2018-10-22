@@ -6,7 +6,7 @@
 /*   By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/20 17:42:58 by cgarrot      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/20 18:46:37 by cgarrot     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/22 15:09:16 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,6 @@ int		ft_sqrt(int nb)
 
 	a = 0;
 	if (nb > 0)
-	{
 		while (a <= nb)
 		{
 			if (nb == a * a)
@@ -30,7 +29,6 @@ int		ft_sqrt(int nb)
 			else
 				a++;
 		}
-	}
 	else
 		return (0);
 	return (0);
@@ -96,3 +94,50 @@ char	**ft_setgrid(int blocks)
 			return (0);
 	return (grid);
 }
+
+/*char	**tab2d(char **files, int blocks)
+{
+	char	**tab;
+	int		i;
+	int		j;
+	int		i2;
+	int		j2;
+	int		size;
+
+	i = 0;
+	j = 0;
+	i2 = 0;
+	size = blocks * 5;
+	if (!(tab = (char**)malloc(sizeof(char*) * size)))
+		return (0);
+	while (size--)
+		if (!(tab[j++] = (char*)malloc(sizeof(char) * 5)))
+			return (0);
+	j = 0;
+	size = blocks * 5;
+	while (size--)
+	{
+		j = 0;
+		while (files[i2][j2])
+		{
+			if (files[i2][j2] == '\n')
+				break;
+			tab[i][j] = files[i2][j2];
+//			printf(" %s\n", tab[i]);
+			j++;
+			j2++;
+		}
+		j2++;
+		if (files[i2][j2])
+		{
+			j2 = 0;
+			i2++;
+		}
+		i++;
+	}
+	return (tab);
+}*/
+
+
+
+

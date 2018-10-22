@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 14:57:52 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/20 20:00:38 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/22 17:39:05 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,8 @@ int		main(int ac, char **av)
 {
 	int		fd;
 	int		i;
-	char	**files;
+	int		j;
+	char	***files;
 	int		c_blocks;
 
 	i = 0;
@@ -40,6 +41,17 @@ int		main(int ac, char **av)
 			ft_putstr("error\n");
 			return (0);
 		}
-		res_algo(files, c_blocks);
+		while (files[i])
+		{
+			j = 0;
+			while (files[i][j])
+			{
+				ft_putstr(files[i][j]);
+				ft_putchar('\n');
+				j++;
+			}
+			printf("%d\n", ft_check_all(files[i]));
+			i++;
+		}
 	}
 }
