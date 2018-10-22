@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/20 19:42:18 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/20 20:01:15 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/22 17:34:59 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,7 +37,7 @@ int		ft_check_pa6_7(char *tab);
 int		check_len(char *file);
 int		check_next_to(char *file);
 int		check_error(char *file, char n_line);
-char	**parse_file(int fd, int *c_blocks);
+char	***parse_file(int fd, int *c_blocks);
 void	ft_putstr2d(char **tab);
 char	**ft_memalloc2d(int size, int len);
 int		**ft_index(char *tab);
