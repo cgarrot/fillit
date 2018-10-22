@@ -19,7 +19,11 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 19:07:09 by thbrouss     #+#   ##    ##    #+#       */
+<<<<<<< HEAD
 /*   Updated: 2018/10/22 16:52:07 by thbrouss    ###    #+. /#+    ###.fr     */
+=======
+/*   Updated: 2018/10/22 16:22:39 by cgarrot     ###    #+. /#+    ###.fr     */
+>>>>>>> c74152cbf40847200fc6dbaf98347e2c6fecd39c
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,8 +38,11 @@ char		***parse_file(int fd, int *c_blocks)
 	size_t	i;
 	size_t	j;
 	size_t	k;
+<<<<<<< HEAD
 	size_t j_b;
 	size_t	i_b;
+=======
+>>>>>>> c74152cbf40847200fc6dbaf98347e2c6fecd39c
 	char ***files;
 	char	buff[BUFF_SIZE + 1];
 
@@ -52,6 +59,7 @@ char		***parse_file(int fd, int *c_blocks)
 			j_b = 0;
 			while (buff[j])
 			{
+<<<<<<< HEAD
 				if (buff[j] == '\n' && j != 20)
 				{
 					i_b = j - 1;
@@ -69,6 +77,9 @@ char		***parse_file(int fd, int *c_blocks)
 					files[i][j_b][k] = '\0';
 					j_b++;
 				}
+=======
+				files[i][j][k] = buff[j];
+>>>>>>> c74152cbf40847200fc6dbaf98347e2c6fecd39c
 				j++;
 			}
 			files[i][j_b] = 0;

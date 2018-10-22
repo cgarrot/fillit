@@ -6,7 +6,11 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 14:57:52 by thbrouss     #+#   ##    ##    #+#       */
+<<<<<<< HEAD
 /*   Updated: 2018/10/22 17:38:28 by thbrouss    ###    #+. /#+    ###.fr     */
+=======
+/*   Updated: 2018/10/22 17:39:05 by cgarrot     ###    #+. /#+    ###.fr     */
+>>>>>>> c74152cbf40847200fc6dbaf98347e2c6fecd39c
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,6 +51,10 @@ int		main(int ac, char **av)
 {
 	int		fd;
 	int		i;
+<<<<<<< HEAD
+=======
+	int		j;
+>>>>>>> c74152cbf40847200fc6dbaf98347e2c6fecd39c
 	char	***files;
 	int		c_blocks;
 
@@ -68,7 +76,22 @@ int		main(int ac, char **av)
 			ft_putstr("error\n");
 			return (0);
 		}
+<<<<<<< HEAD
 		print_tab(files);
 		//res_algo(files, c_blocks);
+=======
+		while (files[i])
+		{
+			j = 0;
+			while (files[i][j])
+			{
+				ft_putstr(files[i][j]);
+				ft_putchar('\n');
+				j++;
+			}
+			printf("%d\n", ft_check_all(files[i]));
+			i++;
+		}
+>>>>>>> c74152cbf40847200fc6dbaf98347e2c6fecd39c
 	}
 }
