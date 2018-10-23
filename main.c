@@ -6,7 +6,11 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 14:57:52 by thbrouss     #+#   ##    ##    #+#       */
+<<<<<<< HEAD
 /*   Updated: 2018/10/23 16:55:34 by thbrouss    ###    #+. /#+    ###.fr     */
+=======
+/*   Updated: 2018/10/23 15:59:03 by cgarrot     ###    #+. /#+    ###.fr     */
+>>>>>>> 95977fc93b55c8512d4204a5d36d1dd6a6a398a6
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,8 +73,9 @@ int		main(int ac, char **av)
 			ft_putstr("error\n");
 			return (0);
 		}
-		/*print_tab(files);
-		while (i < c_blocks)
+		print_tab(files);
+		printf("%d", c_blocks);
+		/*while (i < c_blocks)
 		{
 			// CALL TEST printf("\n%s\n", call_all(ft_check_all(files[i])));
 			i++;

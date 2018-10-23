@@ -3,10 +3,15 @@
 /*                                                              /             */
 /*   fillit.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
+<<<<<<< HEAD
 /*   Created: 2018/10/23 12:42:06 by thbrouss     #+#   ##    ##    #+#       */
 /*   Updated: 2018/10/23 18:34:08 by thbrouss    ###    #+. /#+    ###.fr     */
+=======
+/*   Created: 2018/10/23 15:23:32 by cgarrot      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/23 18:46:32 by cgarrot     ###    #+. /#+    ###.fr     */
+>>>>>>> 95977fc93b55c8512d4204a5d36d1dd6a6a398a6
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,8 +25,9 @@
 # include <sys/stat.h>
 # include <stdio.h>
 
-typedef struct s_tetri
+typedef struct	s_tetri
 {
+<<<<<<< HEAD
 	int curr_block;
 	int	c_blocks;
 	int size;
@@ -57,6 +63,54 @@ int		ft_new_line(char **s, char **line, int fd, int ret);
 int		get_next_line(const int fd, char **line);
 char	*call_all(int n);
 
+=======
+	char	**depository;
+	int		x;
+	int		c_blocks;
+}				t_tetri;
+
+typedef struct	s_compt
+{
+	int		i;
+	int		j;
+	int		k;
+	int		i_b;
+	int		j_b;
+}				t_compt;
+
+int				ft_check_patern(char **tab, int i);
+int				ft_check_pa1(char **tab);
+int				ft_check_2pa1(char **tab);
+int				ft_check_pa2(char **tab);
+int				ft_check_2pa2(char **tab);
+int				ft_check_pa3(char **tab);
+int				ft_check_2pa3(char **tab);
+int				ft_check_pa4_5(char **tab);
+int				ft_check_2pa4_5(char **tab);
+int				ft_check_pa6_7(char **tab);
+int				check_len(char *file);
+int				check_next_to(char *file);
+int				check_error(char *file, char n_line);
+char			***parse_file(int fd, int *c_blocks);
+void			ft_putstr2d(char **tab);
+char			**ft_memalloc2d(int size, int len);
+int				**ft_index(char *tab);
+char			*ft_search_and_replace(char *src, char c);
+char			*ft_search_string(int i);
+char			**ft_input_letter(int bloc, int **index);
+int				ft_strncmp2(const char *s1, const char *s2, size_t n);
+char			**ft_changetoletter(char **files);
+char			**ft_setgrid(int blocks);
+int				ft_sqrt(int nb);
+char			**ft_reduct(char **files);
+int				ft_check_all(char **tab);
+int				res_algo(char **file, int c_blocks);
+char			**tab2d(char **files, int blocks);
+int				ft_new_line(char **s, char **line, int fd, int ret);
+int				get_next_line(const int fd, char **line);
+char			*call_all(int n);
+
+>>>>>>> 95977fc93b55c8512d4204a5d36d1dd6a6a398a6
 # define BUFF_SIZE 21
 
 # define P1 "###\n..#"

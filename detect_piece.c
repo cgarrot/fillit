@@ -6,13 +6,11 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/22 19:25:09 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/23 14:54:26 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/23 18:39:16 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
-#include <stdio.h>
 #include "fillit.h"
 #include "libft.h"
 
@@ -28,16 +26,38 @@ int		ft_check_pa1(char **tab)
 		while (tab[i][j])
 		{
 			if (i + 1 < 4 && j + 2 < 4 && j + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i][j + 1] == '#') && (tab[i][j + 2] == '#') && (tab[i + 1][j + 2] == '#'))
+				if ((tab[i][j] == '#') && (tab[i][j + 1] == '#') &&
+						(tab[i][j + 2] == '#') && (tab[i + 1][j + 2] == '#'))
 					return (1);
 			if (i + 2 < 4 && i + 1 < 4 && j - 1 >= 0)
-				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i + 2][j] == '#') && (tab[i + 2][j - 1] == '#'))
+				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') &&
+						(tab[i + 2][j] == '#') && (tab[i + 2][j - 1] == '#'))
 					return (2);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int		ft_check_2pa1(char **tab)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (tab[i])
+	{
+		j = 0;
+		while (tab[i][j])
+		{
 			if (i + 1 < 4 && j + 2 < 4 && j + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i + 1][j + 1] == '#') && (tab[i + 1][j + 2] == '#'))
+				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i +
+							1][j + 1] == '#') && (tab[i + 1][j + 2] == '#'))
 					return (3);
 			if (i + 2 < 4 && j + 1 < 4 && i + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i][j + 1] == '#') && (tab[i + 1][j] == '#') && (tab[i + 2][j] == '#'))
+				if ((tab[i][j] == '#') && (tab[i][j + 1] == '#') &&
+						(tab[i + 1][j] == '#') && (tab[i + 2][j] == '#'))
 					return (4);
 			j++;
 		}
@@ -58,16 +78,38 @@ int		ft_check_pa2(char **tab)
 		while (tab[i][j])
 		{
 			if (i + 1 < 4 && j + 2 < 4 && j + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i][j + 1] == '#') && (tab[i][j + 2] == '#') && (tab[i + 1][j + 1] == '#'))
+				if ((tab[i][j] == '#') && (tab[i][j + 1] == '#') &&
+						(tab[i][j + 2] == '#') && (tab[i + 1][j + 1] == '#'))
 					return (5);
 			if (i + 1 < 4 && j - 1 >= 0 && i + 2 < 4)
-				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i + 1][j - 1] == '#') && (tab[i + 2][j] == '#'))
+				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') &&
+						(tab[i + 1][j - 1] == '#') && (tab[i + 2][j] == '#'))
 					return (6);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int		ft_check_2pa2(char **tab)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (tab[i])
+	{
+		j = 0;
+		while (tab[i][j])
+		{
 			if (j - 1 >= 0 && i + 1 < 4 && j + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i + 1][j + 1] == '#') && (tab[i + 1][j - 1] == '#'))
+				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i +
+							1][j + 1] == '#') && (tab[i + 1][j - 1] == '#'))
 					return (7);
 			if (i + 2 < 4 && j + 1 < 4 && i + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i + 2][j] == '#') && (tab[i + 1][j + 1] == '#'))
+				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') &&
+						(tab[i + 2][j] == '#') && (tab[i + 1][j + 1] == '#'))
 					return (8);
 			j++;
 		}
@@ -88,151 +130,16 @@ int		ft_check_pa3(char **tab)
 		while (tab[i][j])
 		{
 			if (i - 1 >= 0 && j + 1 < 4 && j + 2 < 4)
-				if ((tab[i][j] == '#') && (tab[i - 1][j] == '#') && (tab[i - 1][j + 1] == '#') && (tab[i - 1][j + 2] == '#'))
+				if ((tab[i][j] == '#') && (tab[i - 1][j] == '#') && (tab[i -
+							1][j + 1] == '#') && (tab[i - 1][j + 2] == '#'))
 					return (9);
 			if (i + 1 < 4 && j + 1 < 4 && i + 2 < 4)
-				if ((tab[i][j] == '#') && (tab[i][j + 1] == '#') && (tab[i + 1][j + 1] == '#') && (tab[i + 2][j + 1] == '#'))
+				if ((tab[i][j] == '#') && (tab[i][j + 1] == '#') && (tab[i +
+							1][j + 1] == '#') && (tab[i + 2][j + 1] == '#'))
 					return (10);
-			if (j - 1 > 0 && i + 1 < 4 && j - 2 >= 0)
-				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i + 1][j - 1] == '#') && (tab[i + 1][j - 2] == '#'))
-					return (11);
-			if (i + 2 < 4 && j + 1 < 4 && i + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i + 2][j] == '#') && (tab[i + 2][j + 1] == '#'))
-					return (12);
 			j++;
 		}
 		i++;
 	}
-	return (0);
-}
-
-int		ft_check_pa4_5(char **tab)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (tab[i])
-	{
-		j = 0;
-		while (tab[i][j])
-		{
-			if (i + 1 < 4 && j + 1 < 4 && j - 1 >= 0)
-				if ((tab[i][j] == '#') && (tab[i][j + 1] == '#') && (tab[i + 1][j] == '#') && (tab[i + 1][j - 1] == '#'))
-					return (13);
-			if (i + 2 < 4 && j + 1 < 4 && i + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i + 1][j + 1] == '#') && (tab[i + 2][j + 1] == '#'))
-					return (14);
-			if (i + 1 < 4 && j + 2 < 4 && j + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i][j + 1] == '#') && (tab[i + 1][j + 1] == '#') && (tab[i + 1][j + 2] == '#'))
-					return (15);
-			if (j + 1 < 4 && i - 1 >= 0 && i - 2 >= 0)
-				if ((tab[i][j] == '#') && (tab[i - 1][j] == '#') && (tab[i - 1][j + 1] == '#') && (tab[i - 2][j + 1] == '#'))
-					return (16);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int		ft_check_pa6_7(char **tab)
-{
-	int		i;
-	int		j;
-	i = 0;
-	while (tab[i])
-	{
-		j = 0;
-		while (tab[i][j])
-		{
-			if (j + 3 < 4 && j + 2 < 4 && j + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i][j + 1] == '#') && (tab[i][j + 2] == '#') && (tab[i][j + 3] == '#'))
-					return (17);
-			if (i + 3 < 4 && i + 2 < 4 && i + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i + 2][j] == '#') && (tab[i + 3][j] == '#'))
-					return (18);
-			if (i + 1 < 4 && j + 1 < 4)
-				if ((tab[i][j] == '#') && (tab[i + 1][j] == '#') && (tab[i + 1][j + 1] == '#') && (tab[i][j + 1] == '#'))
-					return (19);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-
-char *call_pa2(int n)
-{
-	if (n == 13)
-		return (P13);
-	if (n == 14)
-		return (P14);
-	if (n == 15)
-		return (P15);
-	if (n == 16)
-		return (P16);
-	if (n == 17)
-		return (P17);
-	if (n == 18)
-		return (P18);
-	if (n == 19)
-		return (P19);
-	return (NULL);
-}
-
-char *call_pa1(int n)
-{
-	if (n == 1)
-		return (P1);
-	if (n == 2)
-		return (P2);
-	if (n == 3)
-		return (P3);
-	if (n == 4)
-		return (P4);
-	if (n == 5)
-		return (P5);
-	if (n == 6)
-		return (P6);
-	if (n == 7)
-		return (P7);
-	if (n == 8)
-		return (P8);
-	if (n == 9)
-		return (P9);
-	if (n == 10)
-		return (P10);
-	if (n == 11)
-		return (P11);
-	if (n == 12)
-		return (P12);
-	return (NULL);
-}
-
-char *call_all(int n)
-{
-	if (n > 0 && n < 13)
-		return (call_pa1(n));
-	if (n > 12 && n < 20)
-		return (call_pa2(n));
-	return (NULL);
-}
-
-int		ft_check_all(char **tab)
-{
-	int res;
-
-	if ((res = ft_check_pa1(tab)))
-		return (res);
-	else if ((res = ft_check_pa2(tab)))
-		return (res);
-	else if ((res = ft_check_pa3(tab)))
-		return (res);
-	else if ((res = ft_check_pa4_5(tab)))
-		return (res);
-	else if ((res = ft_check_pa6_7(tab)))
-		return (res);
 	return (0);
 }
