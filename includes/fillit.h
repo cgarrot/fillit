@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/23 12:42:06 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/23 13:02:57 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/23 18:34:08 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,9 +22,11 @@
 
 typedef struct s_tetri
 {
-	char **depository;
-   	int	x;
+	int curr_block;
 	int	c_blocks;
+	int size;
+	int curr_x;
+	int curr_y;
 }	t_tetri;
 
 int		ft_check_patern(char **tab, int i);
@@ -49,12 +51,11 @@ char	**ft_setgrid(int blocks);
 int		ft_sqrt(int nb);
 char	**ft_reduct(char **files);
 int		ft_check_all(char **tab);
-int		res_algo(char **file, int c_blocks);
+int		res_algo(char ***file, int c_blocks);
 char	**tab2d(char **files, int blocks);
 int		ft_new_line(char **s, char **line, int fd, int ret);
 int		get_next_line(const int fd, char **line);
 char	*call_all(int n);
-
 
 # define BUFF_SIZE 21
 
