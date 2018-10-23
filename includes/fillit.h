@@ -5,21 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/22 19:05:32 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/22 19:27:41 by thbrouss    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   fillit.h                                         .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/22 17:44:35 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/22 17:50:34 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/23 12:42:06 by thbrouss     #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/23 13:02:57 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,12 +20,11 @@
 # include <sys/stat.h>
 # include <stdio.h>
 
-
-// store les coordonnees du tetri [4 extremitees].... map[t_extre + new_cords] et check sur quel extrimites on peut poser le tris.
-
 typedef struct s_tetri
 {
-	int curr_pos[4];
+	char **depository;
+   	int	x;
+	int	c_blocks;
 }	t_tetri;
 
 int		ft_check_patern(char **tab, int i);
@@ -67,49 +53,29 @@ int		res_algo(char **file, int c_blocks);
 char	**tab2d(char **files, int blocks);
 int		ft_new_line(char **s, char **line, int fd, int ret);
 int		get_next_line(const int fd, char **line);
+char	*call_all(int n);
 
 
-# define LINE_L 0
-# define HASH_N 1
 # define BUFF_SIZE 21
 
-# define P1 1
-# define P1_DISP "###\n..#"
-# define P2 2
-# define P2_DISP ".#\n.#\n##"
-# define P3 3
-# define P3_DISP "#..\n###"
-# define P4 4
-# define P4_DISP "##\n#.\n#."
-# define P5 5
-# define P5_DISP "###\n.#."
-# define P6 6
-# define P6_DISP ".#\n##\n.#"
-# define P7 7
-# define P7_DISP ".#.\n###"
-# define P8 8
-# define P8_DISP "#.\n##\n#."
-# define P9 9
-# define P9_DISP "###\n#.."
-# define P10 10
-# define P10_DISP "##\n.#\n.#"
-# define P11 11
-# define P11_DISP "..#\n###"
-# define P12 12
-# define P12_DISP "#.\n#.\n##"
-# define P13 13
-# define P13_DISP ".##\n##."
-# define P14 14
-# define P14_DISP "#.\n##\n.#"
-# define P15 15
-# define P15_DISP "##.\n.##"
-# define P16 16
-# define P16_DISP ".#\n##\n#."
-# define P17 17
-# define P17_DISP "####"
-# define P18 18
-# define P18_DISP "#\n#\n#\n#"
-# define P19 19
-# define P19_DISP "##\n##"
+# define P1 "###\n..#"
+# define P2 ".#\n.#\n##"
+# define P3 "#..\n###"
+# define P4 "##\n#.\n#."
+# define P5 "###\n.#."
+# define P6  ".#\n##\n.#"
+# define P7 ".#.\n###"
+# define P8 "#.\n##\n#."
+# define P9 "###\n#.."
+# define P10 "##\n.#\n.#"
+# define P11 "..#\n###"
+# define P12 "#.\n#.\n##"
+# define P13 ".##\n##."
+# define P14 "#.\n##\n.#"
+# define P15 "##.\n.##"
+# define P16 ".#\n##\n#."
+# define P17 "####"
+# define P18 "#\n#\n#\n#"
+# define P19 "##\n##"
 
 #endif

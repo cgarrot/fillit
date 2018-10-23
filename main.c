@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 14:57:52 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/22 21:56:43 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/23 13:43:55 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,14 +44,12 @@ void	print_tab(char ***tab)
 	}
 }
 
-
-
 int		main(int ac, char **av)
 {
 	int		fd;
 	int		i;
 	char	***files;
-	int		c_blocks;
+	int		c_blocks;	
 
 	i = 0;
 	c_blocks = 0;
@@ -71,13 +69,12 @@ int		main(int ac, char **av)
 			ft_putstr("error\n");
 			return (0);
 		}
-		print_tab(files);
-		while (i < 19)
+		/*print_tab(files);
+		while (i < c_blocks)
 		{
-			printf("%d:", i);
-			printf("%d\n", ft_check_all(files[i]));
+			// CALL TEST printf("\n%s\n", call_all(ft_check_all(files[i])));
 			i++;
-		}
+		}*/
 		//res_algo(files, c_blocks);
 	}
 }
