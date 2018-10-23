@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 15:45:48 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/22 21:27:28 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/23 14:47:36 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ void	print_grid(char **grid, int size)
 	i = 0;
 	while (i < size)
 	{
-		
+
 		j = 0;
 		while (grid[i][j])
 		{
@@ -34,99 +34,64 @@ void	print_grid(char **grid, int size)
 	}		
 }
 
-int 	calc_long(int k, char *piece)
+int 	calc_space(char *line, char *piece, int x, int size)
 {
 	int i;
+	int j;
+	int next_line;
+	int space;
 
 	i = 0;
-	while (piece[i] && piece[i] != '\n' && piece[i] != '.')
-		i++;
-	if (k == i)
+	next_line = 0;
+	space = 0;
+	while (line[j])
+	{
+		if (line[j] == '\n' && piece[x + 1][i] == '.' && x + 1 < size)
+		{
+			new_line++;
+			x++;
+		}
+
+		if ((line[j] == '#' || line[j] == '.') && piece[x][i] == '.')
+		{
+			i++;
+			space++;
+		}
+		j++;
+	}
+	if (new_line + space == ft_strlen(line))
 		return (1);
 	return (0);
 }	
 
-char	*get_piece(char **file, int x)
+char	*get_piece(char ***file, int block)
 {
-	int y;
-	int len;
-	int i;
-	char *tetri;
-
-	len = 0;
-	y = 0;
-	while (file[x][y])
-	{
-
-		if (file[x][y] == '#')
-		{
-			len++;
-			while (file[x][y] == '#')
-			{
-				y++;
-				len++;
-			}
-			len++;
-		}
-		y++;
-	}
-	if (!(tetri = malloc(sizeof(char) * len + 1)))
-		return (0);
-	i = 0;
-	y = 0;
-	while (file[x][y])
-	{
-		if (file[x][y] == '#')
-		{
-			while (file[x][y] == '#')
-			{
-				tetri[i] = file[x][y];
-				i++;
-				y++;
-			}
-			tetri[i] = '\n';
-		}
-		y++;
-	}
-	// TODO : AFFICHER DIFFERENTE FORME.
-	//printf("%s", tetri);
-	tetri[i] = '\0';
-	return (tetri);	
+	return (call_all(ft_check_all(file[block])));
 }
 
-
-
-int		*ft_putable(char **grid, char **file, int i)
+int		*ft_putable(char **grid, char ***file, int i, int size)
 {
 	int x;
 	int y;
-	static int coords[2];
-	int k;
+	char *shape;
+	t_tetri *tetri;
 
 	x = 0;
+	tetri = malloc(sizeof(t_tetri));
+	shape = get_piece(file, i);
 	while (grid[x])
 	{
-		y = 0;
-		while (grid[x][y])
+		if (calc_space(shape, grid[x], x, size) && x + 1 < size)
 		{
-			if (grid[x][y] == '.')
-			{
-				k = 0;
-				while (grid[x][y + k] == '.' && grid[x][y + k] != '#')
-					k++;
-				if (calc_long(k, get_piece(file, i)))
-				{
-					coords[0] = x;
-					coords[1] = y;
-					return (coords);
-				}
-			}	
-			y++;
+			tetri->x = x;
+			tetri->y = 
+			//coords[1] = y;
+			return (coords);
 		}
 		x++;
 	}
-	return (0);
-}	
+	return (0);	
+}
 
 void	ft_put(char **grid, char **file, int *coords, int i)
 {
@@ -154,7 +119,7 @@ void	ft_put(char **grid, char **file, int *coords, int i)
 	}	
 }
 
-void	clear_grid(char **grid, char *file, int *coords)
+void	clear_piece(char **grid, char *file, int *coords)
 {
 	int x;
 	int y;
@@ -211,16 +176,16 @@ int		resolve_algo(char **file, int x, char **grid, int size, int c_blocks)
 	// 4 ) DISPLAY CARRE EN CHECKANT FORME => LETTRE.
 
 	int i;
-	int *coords;
 
 	i = 0;
 	if (x == c_blocks)
 		return (1);
 	while (i < size)
 	{
-		if ((coords = ft_putable(grid, file, x)))
+		// pas besoin des coords... juste iterer dans le tab.
+		if (ft_putable(grid, file, x, size))
 		{
-			ft_put(grid, file, coords, x);
+			ft_put(grid, file, coords, x); // enregistre les coords
 			// check si on peut poser la piece suivante du file, juste apres la piece du grid.
 			//print_grid(grid, size);
 			//printf(" coords x : %d, coords y : %d", coords[0], coords[1]);
@@ -228,11 +193,10 @@ int		resolve_algo(char **file, int x, char **grid, int size, int c_blocks)
 			// 
 			if (resolve_algo(file, x + 1, grid, size, c_blocks))
 				return (1);
-			else
-				clear_grid(grid, file[x], coords);
 		}
 		i++;
 	}
+	clear_piece(grid, file[x], coords); // supprime forme de piece a partir des coords (x, y).
 	// si peut pas poser la piece dans le grid, enleve la piece.
 	return (0);
 }
@@ -247,7 +211,7 @@ int		next_sqrt(int n)
 	return (i + 1 * i + 1);
 }
 
-int		res_algo(char **file, int c_blocks)
+int		res_algo(char ***file, int c_blocks)
 {
 	int x;
 	int size;
