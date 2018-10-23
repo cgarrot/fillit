@@ -6,7 +6,7 @@
 #    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/18 16:32:29 by thbrouss     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/23 12:39:23 by thbrouss    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/23 18:42:03 by cgarrot     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -26,6 +26,8 @@ FILES = parse_input\
 main\
 check_error\
 detect_piece\
+detect_piece2\
+detect_global\
 #algo
 
 #----------------------------------SOURCE--------------------------------------#

@@ -6,59 +6,55 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 19:07:09 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/23 14:43:23 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/23 18:18:44 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
-#include <stdio.h>
 
-char		***parse_file(int fd, int *c_blocks)
+int		parse_cpy(char ***files, char *buff, t_compt *comp)
 {
-	int		bytes;
-	int	i;
-	int	j;
-	int	k;
-	int j_b;
-	int	i_b;
-	char ***files;
-	char	buff[BUFF_SIZE + 1];
-
-	if (!(files = malloc(sizeof(char**) * 26 + 1)))
+	if (buff[comp->j] == '\n' && comp->j != 20)
+	{
+		comp->i_b = comp->j - 1;
+		files[comp->i][comp->j_b] = ft_memalloc(sizeof(char) * 5);
+		comp->k = 3;
+		while (buff[comp->i_b] != '\n' && buff[comp->i_b])
+			files[comp->i][comp->j_b][comp->k--] = buff[comp->i_b--];
+		files[comp->i][comp->j_b][4] = '\0';
+		comp->j_b++;
+		return (1);
+	}
+	else
 		return (0);
-	i = 0;
-	while ((bytes = read(fd, buff, BUFF_SIZE)) > 0)
+}
+
+char	***parse_file(int fd, int *c_blocks)
+{
+	int			bytes;
+	char		***files;
+	char		buff[BUFF_SIZE + 1];
+	t_compt		*comp;
+
+	comp = malloc(sizeof(t_compt));
+	files = ft_memalloc(sizeof(char**) * 27);
+	comp->i = 0;
+	while ((bytes = read(fd, buff, BUFF_SIZE)) > 0 && ((*c_blocks)++ != 27))
 	{
 		buff[bytes] = '\0';
-		j = 0;
-		files[i] = malloc(sizeof(char*) * 4 + 1);
-		j_b = 0;
-		while (buff[j])
-		{
-			if (buff[j] == '\n' && j != 20)
-			{
-				i_b = j - 1;	
-				files[i][j_b] = malloc(sizeof(char) * 4 + 1);
-				k = 3;
-				while (buff[i_b] != '\n' && buff[i_b])
-				{
-					files[i][j_b][k] = buff[i_b];
-					k--;
-					i_b--;
-				}
-				files[i][j_b][4] = '\0';
-				j_b++;
-			}
-			j++;
-		}
-		files[i][j_b] = 0;
-		//if (!check_error(files[i][j_b], buff[j - 1]))
-			//return (NULL);
-		i++;
-		(*c_blocks)++;
+		files[comp->i] = ft_memalloc(sizeof(char*) * 5);
+		comp->j = 0;
+		comp->j_b = 0;
+		while (buff[comp->j++])
+			if (parse_cpy(files, buff, comp) == 1)
+				;
+		files[comp->i][comp->j_b] = 0;
+		if (!check_error(files[comp->i][comp->j_b], buff[comp->j - 1]))
+			return (NULL);
+		comp->i++;
 	}
-	files[i] = 0;
+	files[comp->i] = 0;
 	return (files);
 }
