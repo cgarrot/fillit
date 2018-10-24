@@ -3,18 +3,13 @@
 #                                                               /              #
 #    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
-#    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
+#    By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
-#    Created: 2018/10/18 16:32:29 by thbrouss     #+#   ##    ##    #+#        #
-<<<<<<< HEAD
-#    Updated: 2018/10/23 16:31:24 by thbrouss    ###    #+. /#+    ###.fr      #
-=======
-#    Updated: 2018/10/23 18:42:03 by cgarrot     ###    #+. /#+    ###.fr      #
->>>>>>> 95977fc93b55c8512d4204a5d36d1dd6a6a398a6
+#    Created: 2018/10/24 13:15:50 by cgarrot      #+#   ##    ##    #+#        #
+#    Updated: 2018/10/24 14:04:28 by cgarrot     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
-
 
 .PHONY: all clean fclean re
 
@@ -30,13 +25,9 @@ FILES = parse_input\
 main\
 check_error\
 detect_piece\
-<<<<<<< HEAD
-algo
-=======
 detect_piece2\
 detect_global\
 #algo
->>>>>>> 95977fc93b55c8512d4204a5d36d1dd6a6a398a6
 
 #----------------------------------SOURCE--------------------------------------#
 
@@ -72,6 +63,6 @@ fclean: clean
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@echo "\033[1m|-------Supprimer la libft.a------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
-	@rm -f $(NAME) 
+	@rm -f $(NAME)
 
 re: fclean all
