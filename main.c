@@ -3,10 +3,15 @@
 /*                                                              /             */
 /*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
+<<<<<<< HEAD
 /*   Created: 2018/10/24 12:49:12 by thbrouss     #+#   ##    ##    #+#       */
 /*   Updated: 2018/10/24 12:49:29 by thbrouss    ###    #+. /#+    ###.fr     */
+=======
+/*   Created: 2018/10/24 13:14:54 by cgarrot      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/24 13:43:40 by cgarrot     ###    #+. /#+    ###.fr     */
+>>>>>>> 355a3b6d3c4374e227f4dfa815bc21dbcb0ae09c
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,7 +74,17 @@ int		main(int ac, char **av)
 			ft_putstr("error\n");
 			return (0);
 		}
+<<<<<<< HEAD
 		//print_tab(files);
 		res_algo(files, c_blocks);
+=======
+		print_tab(files);
+		printf("%d", c_blocks);
+		/*while (i < c_blocks)
+		{
+			// CALL TEST printf("\n%s\n", call_all(ft_check_all(files[i])));
+			i++;
+		}*/
+>>>>>>> 355a3b6d3c4374e227f4dfa815bc21dbcb0ae09c
 	}
 }

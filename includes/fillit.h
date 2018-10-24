@@ -5,8 +5,13 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
+<<<<<<< HEAD
 /*   Created: 2018/10/24 13:10:16 by thbrouss     #+#   ##    ##    #+#       */
 /*   Updated: 2018/10/24 17:53:09 by thbrouss    ###    #+. /#+    ###.fr     */
+=======
+/*   Created: 2018/10/24 13:16:44 by cgarrot      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/24 14:00:12 by cgarrot     ###    #+. /#+    ###.fr     */
+>>>>>>> 355a3b6d3c4374e227f4dfa815bc21dbcb0ae09c
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,6 +34,7 @@ typedef struct s_coords
 
 typedef struct	s_tetri
 {
+<<<<<<< HEAD
 	int curr_block;
 	int	c_blocks;
 	int size;
@@ -36,6 +42,15 @@ typedef struct	s_tetri
 	t_coords **coords;
 	int curr_y;
 }	t_tetri;
+=======
+	int		curr_block;
+	int		c_blocks;
+	int		size;
+	int		curr_x;
+	int		curr_y;
+}				t_tetri;
+
+>>>>>>> 355a3b6d3c4374e227f4dfa815bc21dbcb0ae09c
 
 typedef struct	s_compt
 {
@@ -56,9 +71,8 @@ int				ft_check_2pa3(char **tab);
 int				ft_check_pa4_5(char **tab);
 int				ft_check_2pa4_5(char **tab);
 int				ft_check_pa6_7(char **tab);
-int				check_len(char *file);
-int				check_next_to(char *file);
-int				check_error(char *file, char n_line);
+int				check_error(char **file);
+int				check_line(char **line);
 char			***parse_file(int fd, int *c_blocks);
 void			ft_putstr2d(char **tab);
 char			**ft_memalloc2d(int size, int len);

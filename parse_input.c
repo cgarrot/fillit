@@ -6,7 +6,11 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 19:07:09 by thbrouss     #+#   ##    ##    #+#       */
+<<<<<<< HEAD
 /*   Updated: 2018/10/24 12:50:39 by thbrouss    ###    #+. /#+    ###.fr     */
+=======
+/*   Updated: 2018/10/24 13:46:23 by cgarrot     ###    #+. /#+    ###.fr     */
+>>>>>>> 355a3b6d3c4374e227f4dfa815bc21dbcb0ae09c
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,8 +55,13 @@ char	***parse_file(int fd, int *c_blocks)
 			if (parse_cpy(files, buff, comp) == 1)
 				;
 		files[comp->i][comp->j_b] = 0;
+<<<<<<< HEAD
 		//if (!check_error(files[comp->i][comp->j_b], buff[comp->j - 1]))
 			//return (NULL);
+=======
+		if (!check_error(files[comp->i]))
+			return (NULL);
+>>>>>>> 355a3b6d3c4374e227f4dfa815bc21dbcb0ae09c
 		comp->i++;
 	}
 	files[comp->i] = 0;
