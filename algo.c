@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 15:45:48 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/23 21:19:52 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 17:48:39 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,34 +35,6 @@ void	print_grid(char **grid, int size)
 	ft_putchar('\n');	
 }
 
-int		get_dim2(char *line)
-{
-	int c_l;
-
-	c_l = 0;
-	while (*line)
-	{
-		if (*line == '\n')
-			c_l++;
-		line++;
-	}
-	return (c_l);
-}
-
-int	get_dim(char *line)
-{
-	int c_l;
-
-	c_l = 0;
-	while (*line != '\n')
-	{
-		c_l++;
-		line++;
-	}
-	return (c_l);
-}
-
-
 int 	calc_space(char *line, char **grid, t_tetri *tetri)
 {
 	int i;
@@ -72,13 +44,11 @@ int 	calc_space(char *line, char **grid, t_tetri *tetri)
 	int k;
 	int l;
 	size_t space;
-	int longeur;
 
 	i = 0;
 	x = tetri->curr_x;
 	k = 0;
 	l = 0;
-	longeur = 0;
 	next_line = 0;
 	if (line == NULL)
 		return (0);
@@ -88,37 +58,30 @@ int 	calc_space(char *line, char **grid, t_tetri *tetri)
 	{
 		k = x;
 		l = i;
-		longeur = 0;
 		while (line[j])
 		{
 			if (line[j] == '\n' && k + 1 < tetri->size && grid[k + 1][l] == '.')
 			{
 				next_line++;
 				k++;
+				l = i;
+			}
+			if (line[j] == '.' && grid[k][l] == '.' && l + 1 < tetri->size)
+			{
+				l++;
+				space++;
 			}
 			if (line[j] == '#' && grid[k][l] == '.' && l + 1 < tetri->size)
 			{	
 				l++;
 				space++;
 			}
-			if (line[j] == '.' && grid[k][l] == '.' && l + 1 < tetri->size)
-			{
-				l++;
-				space++;
-			}		
 			j++;
 		}
+		if (k == tetri->size || l == tetri->size)
+			return (0);
 		if (next_line + space == ft_strlen(line))
-		{
-			if (tetri->curr_block == 0)
-				tetri->curr_y = 0;
-			else
-			{
-				tetri->curr_x = x;
-				tetri->curr_y = get_dim(line) + 1;
-			}
 			return (1);
-		}
 		i++;
 	}
 	return (0);	
@@ -131,35 +94,88 @@ char	*get_piece(char ***file, t_tetri *tetri)
 	return (NULL);
 }
 
-void	ft_put(char **grid, char *shape, t_tetri *tetri)
+int	*get_next_coords(t_tetri *tetri)
+{
+	int *coords;
+	int max_x;
+	int max_y;
+	int i;
+	
+	max_x = 0;
+	max_y = 0;
+	if (!(coords = malloc(sizeof(int) * 3)))
+		return (NULL);
+	coords[0] = 0;
+	coords[1] = 0;
+	i = 0;
+	while (i < 4)
+	{
+		if (tetri->coords[i]->x > max_x)
+			max_x = tetri->coords[i]->x;
+ 		if (tetri->coords[i]->y > max_y)
+			max_y = tetri->coords[i]->y;
+		i++;
+	}
+	printf("SIZE %d --- MAX Y %d", tetri->size, max_y);
+	if (max_y + 1 == tetri->size)
+	{
+		coords[0] = max_x + 1;
+		coords[1] = 0;
+	}
+	else
+	{	
+		coords[0] = tetri->coords[0]->x;
+		coords[1] = max_y + 1;
+	}
+	return (coords);
+}
+
+int		ft_put(char **grid, char *shape, t_tetri *tetri)
 {
 	int x;
 	int y;
+	int i;
 	int j;
-	int tmp;
+	int prev;
+	int *next_coord;
 
 	j = 0;
-	tmp = 0;
-	x = tetri->curr_x;
-	y = tetri->curr_y;
+	i = 0;
+	x = 0;
+	y = 0;
+	prev = 0;
+	if (tetri->curr_block > 0)
+	{
+		next_coord = get_next_coords(tetri);
+		x = next_coord[0];
+		y = next_coord[1];
+		printf("\nNEXT X : %d, NEXT Y : %d", next_coord[0], next_coord[1]);
+
+	}
 	if (x + 1 == tetri->size || y + 1 == tetri->size)
-		return ;
+		return (0);
+	printf("\n%s\n", shape);
+	prev = y;
 	while (shape[j])
 	{
+		if (/*x + 1 < tetri->size && y + 1 < tetri->size*/ shape[j] == '#' && grid[x][y] == '.')
+		{
+			grid[x][y] = shape[j];
+			tetri->coords[i]->x = x;
+			tetri->coords[i]->y = y;
+			i++;
+			y++;
+		}
 		if (shape[j] == '\n')
 		{
 			x++;
-			y = tetri->curr_y;
+			y = prev;
 		}
-		if (shape[j] == '.' && grid[x][y] == '.')
+		if (shape[j] == '.')
 			y++;
-		if (shape[j] == '#' && grid[x][y] == '.')
-		{
-			grid[x][y] = shape[j];
-			y++;
-		}
 		j++;
-	}	
+	}
+	return (1);	
 }
 
 int		ft_putable(char **grid, char ***file, t_tetri *tetri)
@@ -174,7 +190,7 @@ int		ft_putable(char **grid, char ***file, t_tetri *tetri)
 		tetri->curr_x = x;
 		if (calc_space(shape, grid, tetri) && x + 1 != tetri->size)
 		{
-			printf("X : %d, Y: %d\n", tetri->curr_x, tetri->curr_y);
+			// DEBUG CORRDS : printf("X : %d, Y: %d\n", tetri->curr_x, tetri->curr_y);
 			ft_put(grid, shape, tetri);
 			print_grid(grid, tetri->size);
 			return (1);
@@ -184,32 +200,21 @@ int		ft_putable(char **grid, char ***file, t_tetri *tetri)
 	return (0);	
 }
 
-void	clear_piece(char **grid, char *shape, t_tetri *tetri)
+void	clear_piece(char **grid, t_tetri *tetri)
 {
 	int x;
 	int y;
-	int j;
+	int i;
 
-	j = 0;
-	x = tetri->curr_x;
-	y = tetri->curr_y;
-	if (x + 1 == tetri->size || y + 1 == tetri->size)
-		return ;
-	while (shape[j])
+	x = 0;
+	y = 0;
+	i = 0;
+	while (i < 4)
 	{
-		if (shape[j] == '\n')
-		{
-			x++;
-			y = tetri->curr_y;
-		}
-		if (shape[j] == '.' && grid[x][y] == '.')
-			y++;
-		if (shape[j] == '#' && grid[x][y] == '.')
-		{
-			grid[x][y] = shape[j];
-			y++;
-		}
-		j++;
+		x = tetri->coords[i]->x;
+		y = tetri->coords[i]->y;
+		grid[x][y] = '.';
+		i++;
 	}
 }
 
@@ -254,8 +259,18 @@ int		resolve_algo(char ***file, char **grid, t_tetri *tetri)
 		}
 		i++;
 	}
-	clear_piece(grid, get_piece(file, tetri), tetri); 
+	clear_piece(grid, tetri);
 	return (0);
+}
+
+void	init_coords(t_tetri *tetri)
+{
+	int i;
+	
+	tetri->coords = (t_coords**)malloc(sizeof(t_coords*) * 4);
+	i = 0;
+	while (i < 4)
+		tetri->coords[i++] = (t_coords*)malloc(sizeof(t_coords));
 }
 
 int		res_algo(char ***file, int c_blocks)
@@ -264,18 +279,18 @@ int		res_algo(char ***file, int c_blocks)
 	char **grid;
 	t_tetri *tetri;
 
-	size = 4;
+	size = 5;
 	grid = init_grid(size);
 	tetri = malloc(sizeof(t_tetri));
+	init_coords(tetri);
 	tetri->c_blocks = c_blocks;
-	tetri->curr_x = 0;
-	tetri->curr_y = 0;
 	tetri->size = size;
-	tetri->curr_block = 0;
+	init_coords(tetri);
 	while (!(resolve_algo(file, grid, tetri)))
 	{
 		tetri->size++;
 		grid = init_grid(tetri->size);
+		//init_coords(tetri);
 		//tetri->curr_block = 0;
 	}
 	print_grid(grid, size);

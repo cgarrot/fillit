@@ -5,16 +5,11 @@
 #                                                  +:+:+   +:    +:  +:+:+     #
 #    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
-#    Created: 2018/10/18 16:32:29 by thbrouss     #+#   ##    ##    #+#        #
-<<<<<<< HEAD
-#    Updated: 2018/10/23 16:31:24 by thbrouss    ###    #+. /#+    ###.fr      #
-=======
-#    Updated: 2018/10/23 18:42:03 by cgarrot     ###    #+. /#+    ###.fr      #
->>>>>>> 95977fc93b55c8512d4204a5d36d1dd6a6a398a6
+#    Created: 2018/10/24 13:22:33 by thbrouss     #+#   ##    ##    #+#        #
+#    Updated: 2018/10/24 13:22:48 by thbrouss    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
-
 
 .PHONY: all clean fclean re
 
@@ -30,13 +25,10 @@ FILES = parse_input\
 main\
 check_error\
 detect_piece\
-<<<<<<< HEAD
-algo
-=======
+algo\
 detect_piece2\
 detect_global\
 #algo
->>>>>>> 95977fc93b55c8512d4204a5d36d1dd6a6a398a6
 
 #----------------------------------SOURCE--------------------------------------#
 
