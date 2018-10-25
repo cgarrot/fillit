@@ -5,13 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-<<<<<<< HEAD
-/*   Created: 2018/10/24 13:10:16 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/24 17:53:09 by thbrouss    ###    #+. /#+    ###.fr     */
-=======
-/*   Created: 2018/10/24 13:16:44 by cgarrot      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/24 14:00:12 by cgarrot     ###    #+. /#+    ###.fr     */
->>>>>>> 355a3b6d3c4374e227f4dfa815bc21dbcb0ae09c
+/*   Created: 2018/10/24 17:59:30 by thbrouss     #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/25 10:45:00 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,23 +29,13 @@ typedef struct s_coords
 
 typedef struct	s_tetri
 {
-<<<<<<< HEAD
 	int curr_block;
 	int	c_blocks;
 	int size;
 	int curr_x;
-	t_coords **coords;
 	int curr_y;
+	t_coords **coords;
 }	t_tetri;
-=======
-	int		curr_block;
-	int		c_blocks;
-	int		size;
-	int		curr_x;
-	int		curr_y;
-}				t_tetri;
-
->>>>>>> 355a3b6d3c4374e227f4dfa815bc21dbcb0ae09c
 
 typedef struct	s_compt
 {

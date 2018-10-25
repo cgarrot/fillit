@@ -3,15 +3,10 @@
 #                                                               /              #
 #    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
-#    By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
+#    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
-<<<<<<< HEAD
-#    Created: 2018/10/24 13:22:33 by thbrouss     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/24 13:22:48 by thbrouss    ###    #+. /#+    ###.fr      #
-=======
-#    Created: 2018/10/24 13:15:50 by cgarrot      #+#   ##    ##    #+#        #
-#    Updated: 2018/10/24 14:04:28 by cgarrot     ###    #+. /#+    ###.fr      #
->>>>>>> 355a3b6d3c4374e227f4dfa815bc21dbcb0ae09c
+#    Created: 2018/10/24 17:57:21 by thbrouss     #+#   ##    ##    #+#        #
+#    Updated: 2018/10/24 17:57:32 by thbrouss    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -30,10 +25,7 @@ FILES = parse_input\
 main\
 check_error\
 detect_piece\
-<<<<<<< HEAD
 algo\
-=======
->>>>>>> 355a3b6d3c4374e227f4dfa815bc21dbcb0ae09c
 detect_piece2\
 detect_global\
 #algo
