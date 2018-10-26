@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/24 17:59:30 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/25 22:02:38 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/26 13:00:29 by thbrouss     #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/26 18:45:07 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,15 @@ typedef struct	s_tetri
 	int size;
 	int curr_x;
 	int curr_y;
-}	t_tetri;
+	int curr_block;
+}				t_tetri;
+
+typedef struct		s_shape
+{
+	int id; // id : 1 a 19.
+	int order; // ordre apparition. curr->block.
+	int pos_y;
+}					t_shape;
 
 typedef struct	s_compt
 {
@@ -35,38 +43,35 @@ typedef struct	s_compt
 	int		k;
 	int		i_b;
 	int		j_b;
+	int		a;
+	int		b;
+	int		x;
+	int		y;
+	int		c_place;
 }				t_compt;
 
-int				ft_check_patern(char **tab, int i);
-int				ft_check_pa1(char **tab);
-int				ft_check_2pa1(char **tab);
-int				ft_check_pa2(char **tab);
-int				ft_check_2pa2(char **tab);
-int				ft_check_pa3(char **tab);
-int				ft_check_2pa3(char **tab);
-int				ft_check_pa4_5(char **tab);
-int				ft_check_2pa4_5(char **tab);
-int				ft_check_pa6_7(char **tab);
 int				check_error(char **file);
 int				check_line(char **line);
 char			***parse_file(int fd, int *c_blocks);
-void			ft_putstr2d(char **tab);
-char			**ft_memalloc2d(int size, int len);
-int				**ft_index(char *tab);
-char			*ft_search_and_replace(char *src, char c);
-char			*ft_search_string(int i);
-char			**ft_input_letter(int bloc, int **index);
-int				ft_strncmp2(const char *s1, const char *s2, size_t n);
-char			**ft_changetoletter(char **files);
-char			**ft_setgrid(int blocks);
-int				ft_sqrt(int nb);
-char			**ft_reduct(char **files);
+void			ft_changetoletter(char **files);
 int				ft_check_all(char **tab);
-int				res_algo(char ***file, int c_blocks);
-char			**tab2d(char **files, int blocks);
-int				ft_new_line(char **s, char **line, int fd, int ret);
-int				get_next_line(const int fd, char **line);
 char			*call_all(int n);
+int				check_space(char *shape, char **grid,
+		t_tetri *tetri);
+void			clear_piece(char **grid, char *shape, t_tetri *tetri);
+int				ft_putable(char **grid, char ***file,
+		t_tetri *tetri, int block, t_shape **shape);
+int				search_algo(char ***file, char **grid,
+		t_tetri *tetri, int block, t_shape **shape);
+int				res_algo(char ***file, int block);
+void			init_coords(t_tetri *tetri);
+void			reset_coords(t_tetri *tetri);
+int				calc_size(int n);
+char			**init_grid(int size);
+void			print_grid(char **grid);
+char			*get_piece(char ***file, int block);
+int				ft_put(char **grid, char *shape, t_tetri *tetri);
+int				get_checker(char **tab);
 
 # define BUFF_SIZE 21
 
@@ -90,8 +95,6 @@ char			*call_all(int n);
 # define P18 "#\n#\n#\n#"
 # define P19 "##\n##"
 
-# define CLEAR 1
-# define PUT 2
-# define CHECK 3
+enum	e_type{CLEAR = 1, PUT = 2, CHECK = 3};
 
 #endif

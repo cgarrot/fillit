@@ -6,7 +6,7 @@
 /*   By: cgarrot <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/23 18:23:27 by cgarrot      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/25 22:08:04 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/26 15:40:11 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,25 +73,5 @@ char	*call_all(int n)
 
 int		ft_check_all(char **tab)
 {
-	int		res;
-
-	if ((res = ft_check_pa1(tab)))
-		return (res);
-	else if ((res = ft_check_pa2(tab)))
-		return (res);
-	else if ((res = ft_check_pa3(tab)))
-		return (res);
-	else if ((res = ft_check_pa4_5(tab)))
-		return (res);
-	else if ((res = ft_check_pa6_7(tab)))
-		return (res);
-	else if ((res = ft_check_2pa1(tab)))
-		return (res);
-	else if ((res = ft_check_2pa2(tab)))
-		return (res);
-	else if ((res = ft_check_2pa3(tab)))
-		return (res);
-	else if ((res = ft_check_2pa4_5(tab)))
-		return (res);
-	return (0);
+	return (get_checker(tab));
 }

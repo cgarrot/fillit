@@ -6,7 +6,7 @@
 #    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/24 17:57:21 by thbrouss     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/24 17:57:32 by thbrouss    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/26 15:49:08 by thbrouss    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -26,9 +26,7 @@ main\
 check_error\
 detect_piece\
 algo\
-detect_piece2\
-detect_global\
-#algo
+detect_global
 
 #----------------------------------SOURCE--------------------------------------#
 
