@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/26 12:56:23 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/26 19:00:40 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/26 19:57:25 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,41 +16,8 @@
 #include "libft.h"
 #include <unistd.h>
 
-char g_c = 'A';
 
-void	ft_changetoletter(char **files)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (files[i])
-	{
-		j = 0;
-		while (files[i][j])
-		{
-			if (files[i][j] == '#')
-				files[i][j] = g_c;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	set_pos(t_shape **shape, t_tetri *tetri, char ***tab)
-{
-	int i;
-
-	i = 0;
-	while (i < tetri->c_blocks)
-	{
-		if (shape[i]->id == get_checker(tab[tetri->curr_block]))
-			shape[i]->pos_y = tetri->curr_y;
-		i++;
-	}
-}
-	
-int		ft_op(char **grid, char *shape, t_tetri *tetri, int type)
+int		ft_op(char **grid, char *shape, t_tetri *tetri, int type, t_shape **shape_op)
 {
 	char c;
 	int j;
@@ -58,14 +25,14 @@ int		ft_op(char **grid, char *shape, t_tetri *tetri, int type)
 	int y;
 	int c_place;
 	int prev;
-
+	int i;
 	x = tetri->curr_x;
 	y = tetri->curr_y;
 	c_place = 0;
 	prev = y;
 	c = 0;
 	j = 0;
-
+	i = 0;
 //	tetri->id[tetri->curr_block] = tetri->curr_block;
 	// FORME => ORDRE APPARITION.
 	// forme[i]->order = ...
@@ -90,7 +57,12 @@ int		ft_op(char **grid, char *shape, t_tetri *tetri, int type)
 			if (type == CLEAR)
 				grid[x][y] = '.';
 			else if (type == PUT)
+			{
 				grid[x][y] = shape[j];
+				shape_op[tetri->curr_block]->pos_x[i] = x;
+				shape_op[tetri->curr_block]->pos_y[i] = y;
+				i++;
+			}
 			else if (type == CHECK)
 				c_place++;
 			y++;
@@ -99,7 +71,6 @@ int		ft_op(char **grid, char *shape, t_tetri *tetri, int type)
 			y++;
 		j++;
 	}
-	g_c++;
 	if (type == CHECK && c_place < 4)
 		return (0);
 	return (1);
@@ -156,10 +127,9 @@ int		ft_putable(char **grid, char ***file, t_tetri *tetri, int block, t_shape **
 		return (0);
 	/*if (!check_space(shape, grid, tetri))
 	  return (0);*/
-	if (!ft_op(grid, shape, tetri, CHECK))
+	if (!ft_op(grid, shape, tetri, CHECK, shape_info))
 		return (0);
-	set_pos(shape_info, tetri, file);
-	ft_op(grid, shape, tetri, PUT);
+	ft_op(grid, shape, tetri, PUT, shape_info);
 	//ft_put(grid, shape, tetri);
 	return (1);	
 }
@@ -261,7 +231,7 @@ int		search_algo(char ***file, char **grid, t_tetri *tetri, int block, t_shape *
 					return (1);
 				tetri->curr_x = i;
 				tetri->curr_y = j;
-				ft_op(grid, get_piece(file, block), tetri, CLEAR);
+				ft_op(grid, get_piece(file, block), tetri, CLEAR, shape_info);
 			}
 			j++;
 		}
@@ -277,7 +247,7 @@ void	init_shape(char ***file, t_shape **shape, int c_blocks)
 
 	i = 0;
 	id = 0;
-	while (i < c_blocks)
+	while (i < c_blocks + 1)
 		shape[i++] = malloc(sizeof(t_shape));
 	i = 0;
 	while (i < c_blocks)
@@ -290,6 +260,42 @@ void	init_shape(char ***file, t_shape **shape, int c_blocks)
 		i++;
 	}
 }
+
+void	to_letter(char **grid, int c_blocks, t_shape **shape)
+{
+	int i;
+	int j;
+	int k;
+	int g;
+	char c;
+
+	c = 'A';
+	i = 0;
+	while (grid[i])
+	{
+		j = 0;
+		while (grid[i][j])
+		{
+			k = 0;
+			g = 0;
+			while (k < c_blocks)
+			{
+				//printf("X :%d Y: %d\n", shape[k]->pos_x[g], shape[k]->pos_y[g]);
+				if ((shape[k]->pos_x[g] == i && shape[k]->pos_y[g] == j) || (g > 0 && g < 4))
+				{
+					grid[shape[k]->pos_x[g]][shape[k]->pos_y[g]] = c + k;
+					g++;
+				}
+				if (g >= 4)
+					break;
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 
 int		res_algo(char ***file, int c_blocks)
 {
@@ -312,6 +318,8 @@ int		res_algo(char ***file, int c_blocks)
 		grid = init_grid(tetri->size);
 		tetri->curr_block = 0;
 	}
+	to_letter(grid, c_blocks, shape);
 	print_grid(grid);
+	free(grid);
 	return (0);
 }

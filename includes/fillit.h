@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/26 13:00:29 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/26 18:45:07 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/26 19:09:25 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,7 +33,8 @@ typedef struct		s_shape
 {
 	int id; // id : 1 a 19.
 	int order; // ordre apparition. curr->block.
-	int pos_y;
+	int pos_x[4];
+	int pos_y[4];
 }					t_shape;
 
 typedef struct	s_compt
