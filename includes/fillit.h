@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/24 17:59:30 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/25 10:45:00 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 22:02:38 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,21 +20,12 @@
 # include <sys/stat.h>
 # include <stdio.h>
 
-typedef struct s_coords
-{
-	int x;
-	int y;
-}	t_coords;
-
-
 typedef struct	s_tetri
 {
-	int curr_block;
 	int	c_blocks;
 	int size;
 	int curr_x;
 	int curr_y;
-	t_coords **coords;
 }	t_tetri;
 
 typedef struct	s_compt
@@ -98,5 +89,9 @@ char			*call_all(int n);
 # define P17 "####"
 # define P18 "#\n#\n#\n#"
 # define P19 "##\n##"
+
+# define CLEAR 1
+# define PUT 2
+# define CHECK 3
 
 #endif

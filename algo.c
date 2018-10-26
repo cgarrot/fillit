@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/19 15:45:48 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/25 20:19:29 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 22:21:14 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,21 +43,66 @@ char	*get_piece(char ***file, int block)
 	return (NULL);
 }
 
-int		ft_put(char **grid, char *shape, t_tetri *tetri, int a, int b)
+int		ft_op(char **grid, char *shape, t_tetri *tetri, int type)
+{
+	char c;
+	int j;
+	int x;
+	int y;
+	int c_place;
+	int prev;
+
+	x = tetri->curr_x;
+	y = tetri->curr_y;
+	c_place = 0;
+	prev = y;
+	c = 0;
+	j = 0;
+	if (type == PUT)
+		c = '.';
+	else if (type == CLEAR)
+		c = '#';
+	else if (type == CHECK)
+		c = '.';
+	while (shape[j])
+	{
+		if (shape[j] == '\n')
+		{
+			y = prev;
+			x++;
+		}
+		if (x == tetri->size || y == tetri->size)
+			return (0);
+		if (shape[j] == '#' && grid[x][y] == c)
+		{
+			if (type == CLEAR)
+				grid[x][y] = '.';
+			else if (type == PUT)
+				grid[x][y] = shape[j];
+			else if (type == CHECK)
+				c_place++;
+			y++;
+		}
+		if (shape[j] == '.')
+			y++;
+		j++;
+	}
+	if (type == CHECK && c_place < 4)
+		return (0);
+	return (1);
+}
+
+/*int		ft_put(char **grid, char *shape, t_tetri *tetri)
 {
 	int x;
 	int y;
-	int i;
 	int j;
 	int prev;
 
 	j = 0;
-	i = 0;
-	x = 0;
-	y = 0;
 	prev = 0;
-	x = a;
-	y = b;	
+	x = tetri->curr_x;
+	y = tetri->curr_y;	
 	prev = y;
 	while (shape[j])
 	{
@@ -69,20 +114,17 @@ int		ft_put(char **grid, char *shape, t_tetri *tetri, int a, int b)
 		if (shape[j] == '#' && grid[x][y] == '.')
 		{
 			grid[x][y] = shape[j];
-			tetri->coords[i]->x = x;
-			tetri->coords[i]->y = y;
-			i++;
 			y++;
 		}
 		if (shape[j] == '.')
 			y++;
 		j++;
 	}
-	return (1);	
-}
+	return (1);
+}*/
 
 
-int		check_space(char *shape, char **grid, t_tetri *tetri, int a, int b)
+/*int		check_space(char *shape, char **grid, t_tetri *tetri)
 {
 	int y;
 	int i;
@@ -90,8 +132,8 @@ int		check_space(char *shape, char **grid, t_tetri *tetri, int a, int b)
 	int c_place;
 	int x;
 
-	x = a;
-	y = b;
+	x = tetri->curr_x;
+	y = tetri->curr_y;
 	c_place = 0;
 	i = 0;
 	prev = y;
@@ -116,9 +158,9 @@ int		check_space(char *shape, char **grid, t_tetri *tetri, int a, int b)
 	if (c_place < 4)
 		return (0);
 	return (1);
-}
+}*/
 
-int		ft_putable(char **grid, char ***file, int a, int b, int block, t_tetri *tetri)
+int		ft_putable(char **grid, char ***file, t_tetri *tetri, int block)
 {
 	char *shape;
 	
@@ -126,42 +168,25 @@ int		ft_putable(char **grid, char ***file, int a, int b, int block, t_tetri *tet
 	if (tetri->curr_x + 1 == tetri->size || tetri->curr_y + 1 == tetri->size
 			|| tetri->curr_y < 0 || tetri->curr_x < 0)
 		return (0);
-	if (!check_space(shape, grid, tetri, a, b))
+	/*if (!check_space(shape, grid, tetri))
+		return (0);*/
+	if (!ft_op(grid, shape, tetri, CHECK))
 		return (0);
-	ft_put(grid, shape, tetri, a, b);
-	//sleep(1);
-	//print_grid(grid);
+	ft_op(grid, shape, tetri, PUT);
+	//ft_put(grid, shape, tetri);
 	return (1);	
 }
 
-void	clear_piece(char **grid, char *shape, int a, int b, t_tetri *tetri)
+/*void	clear_piece(char **grid, char *shape, t_tetri *tetri)
 {
-	/*int x;
-	int y;
-	int i;
-
-	x = 0;
-	y = 0;
-	i = 0;
-	while (i < 4)
-	{
-		x = tetri->coords[i]->x;
-		y = tetri->coords[i]->y;
-		printf("X : %d, Y : %d\n", x, y);
-		grid[x][y] = '.';
-		i++;
-	}
-	print_grid(grid, tetri->size);*/
 	int x;
 	int y;
-	int i;
 	int j;
 	int prev;
 
 	j = 0;
-	i = 0;
-	x = a;
-	y = b;
+	x = tetri->curr_x;
+	y = tetri->curr_y;
 	prev = y;
 	while (shape[j])
 	{
@@ -175,14 +200,13 @@ void	clear_piece(char **grid, char *shape, int a, int b, t_tetri *tetri)
 		if (shape[j] == '#' && grid[x][y] == '#')
 		{
 			grid[x][y] = '.';
-			i++;
 			y++;
 		}
 		if (shape[j] == '.')
 			y++;
 		j++;
 	}
-}
+}*/
 
 char	**init_grid(int size)
 {
@@ -214,6 +238,7 @@ int		resolve_algo(char ***file, char **grid, t_tetri *tetri, int block)
 
 	int i;
 	int j;
+
 	if (tetri->c_blocks == block)
 		return (1);
 	i = 0;
@@ -224,50 +249,20 @@ int		resolve_algo(char ***file, char **grid, t_tetri *tetri, int block)
 		{
 			tetri->curr_x = i;
 			tetri->curr_y = j;
-			if (ft_putable(grid, file, i, j, block, tetri))
+			if (ft_putable(grid, file, tetri, block))
 			{
 				if (resolve_algo(file, grid, tetri, block + 1))
 					return (1);
-				clear_piece(grid, get_piece(file, block), i, j, tetri);
+				tetri->curr_x = i;
+				tetri->curr_y = j;
+				//clear_piece(grid, get_piece(file, block), tetri);
+				ft_op(grid, get_piece(file, block), tetri, CLEAR);
 			}
 			j++;
 		}
 		i++;
 	}
 	return (0);
-}
-
-void	init_coords(t_tetri *tetri)
-{
-	int i;
-
-	tetri->coords = (t_coords**)malloc(sizeof(t_coords*) * 4);
-	i = 0;
-	while (i < 4)
-		tetri->coords[i++] = (t_coords*)malloc(sizeof(t_coords));
-}
-
-void	reset_coords(t_tetri *tetri)
-{
-	int i;
-
-	i = 0;
-	while (i < 4)
-	{
-		tetri->coords[i]->x = 0;
-		tetri->coords[i]->y = 0;
-		i++;
-	}
-}
-
-int  calc_size(int n)
-{
-	int i;
-
-	i = 2;
-	while (i * i < n)
-		i++;
-	return (i);	
 }
 
 int		res_algo(char ***file, int c_blocks)
@@ -279,15 +274,12 @@ int		res_algo(char ***file, int c_blocks)
 	size = 3;
 	grid = init_grid(size);
 	tetri = malloc(sizeof(t_tetri));
-	init_coords(tetri);
 	tetri->c_blocks = c_blocks;
 	tetri->size = size;
 	while (!(resolve_algo(file, grid, tetri, 0)))
 	{
 		tetri->size++;
 		grid = init_grid(tetri->size);
-		reset_coords(tetri);
-		tetri->curr_block = 0;
 	}
 	print_grid(grid);
 	return (0);
