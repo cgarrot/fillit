@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/24 17:59:57 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/25 15:04:49 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/26 06:21:20 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@ int		main(int ac, char **av)
 	int		fd;
 	int		i;
 	char	***files;
-	int		c_blocks;	
+	int		c_blocks;
 
 	i = 0;
 	c_blocks = 0;
