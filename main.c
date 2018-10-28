@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/24 17:59:57 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/26 13:12:01 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/28 19:45:18 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,7 +34,7 @@ int		main(int ac, char **av)
 			ft_putstr("error");
 			return (0);
 		}
-		if (!(files = parse_file(fd, &c_blocks)))
+		if (!(files = parse_file(fd, &c_blocks)) || c_blocks == 0)
 		{
 			ft_putstr("error\n");
 			return (0);

@@ -6,16 +6,13 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/26 12:56:23 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/26 19:57:25 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/28 20:37:01 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
 #include "fillit.h"
 #include "libft.h"
-#include <unistd.h>
-
 
 int		ft_op(char **grid, char *shape, t_tetri *tetri, int type, t_shape **shape_op)
 {
@@ -33,12 +30,6 @@ int		ft_op(char **grid, char *shape, t_tetri *tetri, int type, t_shape **shape_o
 	c = 0;
 	j = 0;
 	i = 0;
-//	tetri->id[tetri->curr_block] = tetri->curr_block;
-	// FORME => ORDRE APPARITION.
-	// forme[i]->order = ...
-	// forme[i]->rank = ...
-	// [P1][curr_block]
-	// if (shape[i]->id == tetri->curr_block) shape[i]->order = tetri->curr_block. **shape, ou shape = 26
 	if (type == PUT || type == CHECK)
 		c = '.';
 	else if (type == CLEAR)
@@ -58,9 +49,9 @@ int		ft_op(char **grid, char *shape, t_tetri *tetri, int type, t_shape **shape_o
 				grid[x][y] = '.';
 			else if (type == PUT)
 			{
-				grid[x][y] = shape[j];
 				shape_op[tetri->curr_block]->pos_x[i] = x;
 				shape_op[tetri->curr_block]->pos_y[i] = y;
+				grid[x][y] = shape[j];
 				i++;
 			}
 			else if (type == CHECK)
@@ -117,14 +108,14 @@ char	*get_piece(char ***file, int block)
 
 
 
-int		ft_putable(char **grid, char ***file, t_tetri *tetri, int block, t_shape **shape_info)
+int		is_putable(char **grid, char ***file, t_tetri *tetri, int block, t_shape **shape_info)
 {
 	char *shape;
 
 	shape = get_piece(file, block);
-	if (tetri->curr_x + 1 == tetri->size || tetri->curr_y + 1 == tetri->size
+	/*if (tetri->curr_x + 1 == tetri->size || tetri->curr_y + 1 == tetri->size
 			|| tetri->curr_y < 0 || tetri->curr_x < 0)
-		return (0);
+		return (0);*/
 	/*if (!check_space(shape, grid, tetri))
 	  return (0);*/
 	if (!ft_op(grid, shape, tetri, CHECK, shape_info))
@@ -225,7 +216,7 @@ int		search_algo(char ***file, char **grid, t_tetri *tetri, int block, t_shape *
 			tetri->curr_x = i;
 			tetri->curr_y = j;
 			tetri->curr_block = block;
-			if (ft_putable(grid, file, tetri, block, shape_info))
+			if (is_putable(grid, file, tetri, block, shape_info))
 			{
 				if (search_algo(file, grid, tetri, block + 1, shape_info))
 					return (1);
@@ -240,23 +231,14 @@ int		search_algo(char ***file, char **grid, t_tetri *tetri, int block, t_shape *
 	return (0);
 }
 
-void	init_shape(char ***file, t_shape **shape, int c_blocks)
+void	init_shape(t_shape **shape, int c_blocks)
 {
 	int i;
-	int id;
 
-	i = 0;
-	id = 0;
-	while (i < c_blocks + 1)
-		shape[i++] = malloc(sizeof(t_shape));
 	i = 0;
 	while (i < c_blocks)
 	{
-		if (!(id = get_checker(file[i])))
-		{
-			shape[i]->id = id;
-			shape[i]->order = i;
-		}
+		shape[i] = malloc(sizeof(t_shape));
 		i++;
 	}
 }
@@ -267,27 +249,33 @@ void	to_letter(char **grid, int c_blocks, t_shape **shape)
 	int j;
 	int k;
 	int g;
+	int c_put;
 	char c;
 
-	c = 'A';
+
 	i = 0;
+	c = 'A';
 	while (grid[i])
 	{
 		j = 0;
 		while (grid[i][j])
 		{
 			k = 0;
-			g = 0;
+			c_put = 0;
 			while (k < c_blocks)
 			{
-				//printf("X :%d Y: %d\n", shape[k]->pos_x[g], shape[k]->pos_y[g]);
-				if ((shape[k]->pos_x[g] == i && shape[k]->pos_y[g] == j) || (g > 0 && g < 4))
+				if (c_put >= 4)
+				   break;
+				g = 0;
+				while (g < 4)
 				{
-					grid[shape[k]->pos_x[g]][shape[k]->pos_y[g]] = c + k;
-					g++;
+					if ((shape[k]->pos_x[g] == i && shape[k]->pos_y[g] == j))
+					{	
+						grid[shape[k]->pos_x[g]][shape[k]->pos_y[g]] = c + k;
+						c_put++;
+					}
+					g++;		
 				}
-				if (g >= 4)
-					break;
 				k++;
 			}
 			j++;
@@ -307,13 +295,12 @@ int		res_algo(char ***file, int c_blocks)
 	size = 2;
 	grid = init_grid(size);
 	shape = malloc(sizeof(t_shape*) * 26);
-	init_shape(file, shape, c_blocks);
+	init_shape(shape, c_blocks);
 	tetri = malloc(sizeof(t_tetri));
 	tetri->c_blocks = c_blocks;
 	tetri->size = size;
 	while (!(search_algo(file, grid, tetri, 0, shape)))
 	{
-		//g_c = 'A';
 		tetri->size++;
 		grid = init_grid(tetri->size);
 		tetri->curr_block = 0;

@@ -6,7 +6,7 @@
 #    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/24 17:57:21 by thbrouss     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/26 15:49:08 by thbrouss    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/28 20:31:25 by thbrouss    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -14,6 +14,7 @@
 .PHONY: all clean fclean re
 
 NAME = fillit
+OBJ = fillit
 MAKE=make
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
@@ -49,13 +50,14 @@ $(NAME): $(SRC) $(INCLUDE)
 	@echo "\033[1m|---------Creation du prog--------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@+$(MAKE) -C libft/
-	@$(CC) $(FLAGS) -g -o $(NAME) $(SRC) -I$(INCLUDE) -L libft/ -lft
+	@$(CC) $(FLAGS) -o $(NAME) $(SRC) -I$(INCLUDE) -L libft/ -lft
 
 clean:
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@echo "\033[1m|-------Supprimer les OBJECT------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@rm -f $(OBJ)
+	@rm -f libft/*.o
 
 fclean: clean
 	@echo "\n"
@@ -63,5 +65,6 @@ fclean: clean
 	@echo "\033[1m|-------Supprimer la libft.a------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@rm -f $(NAME)
+	@rm -f libft/libft.a
 
 re: fclean all
