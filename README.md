@@ -6,3 +6,5 @@
 
 4 ) DISPLAY CARRE EN CHECKANT FORME => LETTRE.
 
+
+TODO : enlever les conditions inutiles dans le ft_putable.
