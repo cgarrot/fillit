@@ -6,7 +6,7 @@
 #    By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/24 17:57:21 by thbrouss     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/28 20:31:25 by thbrouss    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/29 16:18:29 by thbrouss    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -27,7 +27,9 @@ main\
 check_error\
 detect_piece\
 algo\
-detect_global
+detect_global\
+utils\
+letter
 
 #----------------------------------SOURCE--------------------------------------#
 
@@ -40,7 +42,6 @@ OBJ= $(addsuffix .o, $(FILES))
 #-----------------------------------RULE---------------------------------------#
 
 all: $(NAME)
-
 
 $(NAME): $(SRC) $(INCLUDE)
 	@echo "\033[1m|---------------------------------|\033[0m"
@@ -57,7 +58,7 @@ clean:
 	@echo "\033[1m|-------Supprimer les OBJECT------|\033[0m"
 	@echo "\033[1m|---------------------------------|\033[0m"
 	@rm -f $(OBJ)
-	@rm -f libft/*.o
+	@$(MAKE) -C libft/ clean
 
 fclean: clean
 	@echo "\n"

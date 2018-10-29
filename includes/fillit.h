@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/26 13:00:29 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/26 20:26:36 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/29 15:59:59 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,24 +20,29 @@
 # include <sys/stat.h>
 # include <stdio.h>
 
-typedef struct	s_tetri
+typedef struct		s_tetri
 {
-	int	c_blocks;
-	int size;
-	int curr_x;
-	int curr_y;
-	int curr_block;
-}				t_tetri;
+	int		c_blocks;
+	int		size;
+	int		curr_x;
+	int		curr_y;
+	int		tmp_x;
+	char	c;
+	int		tmp_y;
+	int		i_pos;
+	int		type;
+	int		c_place;
+	int		curr_block;
+}					t_tetri;
 
 typedef struct		s_shape
 {
-	int id; // id : 1 a 19.
-	int order; // ordre apparition. curr->block.
-	int pos_x[4];
-	int pos_y[4];
+	int		pos_x[4];
+	int		pos_y[4];
+	char	*pattern;
 }					t_shape;
 
-typedef struct	s_compt
+typedef struct		s_compt
 {
 	int		i;
 	int		j;
@@ -49,30 +54,32 @@ typedef struct	s_compt
 	int		x;
 	int		y;
 	int		c_place;
-}				t_compt;
+}					t_compt;
 
-int				check_error(char **file);
-int				check_line(char **line);
-char			***parse_file(int fd, int *c_blocks);
-void			ft_changetoletter(char **files);
-int				ft_check_all(char **tab);
-char			*call_all(int n);
-int				check_space(char *shape, char **grid,
+int					check_error(char **file);
+int					check_line(char **line);
+char				***parse_file(int fd, int *c_blocks, char ***files);
+void				ft_changetoletter(char **files);
+int					ft_check_all(char **tab);
+char				*call_all(int n);
+int					check_space(char *shape, char **grid,
 		t_tetri *tetri);
-void			clear_piece(char **grid, char *shape, t_tetri *tetri);
-int				ft_putable(char **grid, char ***file,
+void				clear_piece(char **grid, char *shape, t_tetri *tetri);
+int					is_putable(char **grid,
+		t_tetri *tetri, t_shape **shape);
+int					search_algo(char **grid,
 		t_tetri *tetri, int block, t_shape **shape);
-int				search_algo(char ***file, char **grid,
-		t_tetri *tetri, int block, t_shape **shape);
-int				res_algo(char ***file, int block);
-void			init_coords(t_tetri *tetri);
-void			reset_coords(t_tetri *tetri);
-int				calc_size(int n);
-char			**init_grid(int size);
-void			print_grid(char **grid);
-char			*get_piece(char ***file, int block);
-int				ft_put(char **grid, char *shape, t_tetri *tetri);
-int				get_checker(char **tab);
+int					res_algo(int block, t_shape **shape);
+char				**init_grid(int size);
+void				print_grid(char **grid);
+void				set_info(t_tetri *tetri, int i, int j, int block);
+t_shape				**store_pattern(char ***files);
+char				*get_piece(char ***file, int block);
+void				set_pos(t_tetri *tetri, char **grid,
+		t_shape **shape, char c);
+void				to_letter(char **grid, t_tetri *tetri, t_shape **shape);
+int					ft_put(char **grid, char *shape, t_tetri *tetri);
+int					get_checker(char **tab);
 
 # define BUFF_SIZE 21
 
