@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/24 17:59:57 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/29 16:00:53 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/29 18:20:01 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,13 +21,12 @@ int				main(int ac, char **av)
 	int		c_blocks;
 
 	c_blocks = 0;
-	files = ft_memalloc(sizeof(char**) * 27);
+	files = malloc(sizeof(char**) * 27);
 	if (ac != 2)
 		write(1, "usage /fillit [file]\n", 21);
 	else
 	{
-		fd = open(av[1], O_RDONLY);
-		if (fd < 0)
+		if (!(fd = open(av[1], O_RDONLY)))
 		{
 			ft_putstr("error");
 			return (0);

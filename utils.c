@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/29 15:28:27 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/29 16:02:03 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/29 18:18:56 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,9 +19,12 @@ char		**init_grid(int size)
 	int		i;
 	int		j;
 	char	**grid;
+	char	**tmp;
 
-	if (!(grid = (char **)malloc(sizeof(char*) * size + 1)))
+	if (!(tmp = (char **)malloc(sizeof(char*) * size + 1)))
 		return (NULL);
+	grid = tmp;
+	ft_strdel(tmp);
 	i = 0;
 	while (i < size)
 	{
@@ -65,15 +68,19 @@ t_shape		**store_pattern(char ***files)
 {
 	int		i;
 	t_shape **shape;
+	char	*tmp;
 
 	shape = malloc(sizeof(t_shape*) * 26);
 	i = 0;
 	while (files[i])
 	{
 		shape[i] = malloc(sizeof(t_shape));
-		shape[i]->pattern = malloc(sizeof(char) * 10);
+		tmp = malloc(sizeof(char) * 10);
+		shape[i]->pattern = tmp;
+		free(tmp);
 		shape[i]->pattern = call_all(get_checker(files[i]));
 		i++;
 	}
+	free(files);
 	return (shape);
 }

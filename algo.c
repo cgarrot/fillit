@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/26 12:56:23 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/29 15:45:07 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/29 17:15:41 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -118,6 +118,8 @@ int		res_algo(int c_blocks, t_shape **shape)
 	}
 	to_letter(grid, tetri, shape);
 	print_grid(grid);
-	free(grid);
+	free(shape);
+	free(tetri);
+	ft_strdel(grid);
 	return (0);
 }

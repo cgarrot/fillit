@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/24 17:58:11 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/29 15:58:49 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/29 18:09:58 by thbrouss    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,7 +42,7 @@ char	***parse_file(int fd, int *c_blocks, char ***files)
 	while ((bytes = read(fd, buff, BUFF_SIZE)) > 0 && ((*c_blocks)++ != 27))
 	{
 		buff[bytes] = '\0';
-		files[comp->i] = ft_memalloc(sizeof(char*) * 5);
+		files[comp->i] = malloc(sizeof(char*) * 5);
 		comp->j = 0;
 		comp->j_b = 0;
 		while (buff[comp->j++])
