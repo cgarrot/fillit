@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/29 15:28:27 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/29 18:18:56 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/14 20:19:06 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,16 +19,14 @@ char		**init_grid(int size)
 	int		i;
 	int		j;
 	char	**grid;
-	char	**tmp;
 
-	if (!(tmp = (char **)malloc(sizeof(char*) * size + 1)))
+	if (!(grid = (char **)malloc(sizeof(char*) * size + 1)))
 		return (NULL);
-	grid = tmp;
-	ft_strdel(tmp);
 	i = 0;
 	while (i < size)
 	{
-		grid[i] = (char *)malloc(sizeof(char) * size + 1);
+		if (!(grid[i] = (char *)malloc(sizeof(char) * size + 1)))
+			return (0);
 		j = 0;
 		while (j < size)
 		{
@@ -74,13 +72,50 @@ t_shape		**store_pattern(char ***files)
 	i = 0;
 	while (files[i])
 	{
-		shape[i] = malloc(sizeof(t_shape));
+		if (!(shape[i] = malloc(sizeof(t_shape))))
+			return (0);
 		tmp = malloc(sizeof(char) * 10);
 		shape[i]->pattern = tmp;
 		free(tmp);
 		shape[i]->pattern = call_all(get_checker(files[i]));
 		i++;
 	}
-	free(files);
 	return (shape);
+}
+
+void		ft_free2d(char **tab)
+{
+	int		i;
+
+	i = 0;
+	if (tab)
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+	free(tab);
+	tab = NULL;
+}
+
+void		ft_free3d(char ***tab)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (tab)
+		while (tab[i])
+		{
+			while (tab[i][j])
+			{
+				free(tab[i][j]);
+				j++;
+			}
+			free(tab[i]);
+			i++;
+		}
+	free(tab);
+	tab = NULL;
 }

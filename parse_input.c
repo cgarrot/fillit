@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/24 17:58:11 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/29 18:09:58 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/14 20:30:18 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@ int		parse_cpy(char ***files, char *buff, t_compt *comp)
 	if (buff[comp->j] == '\n' && comp->j != 20)
 	{
 		comp->i_b = comp->j - 1;
-		files[comp->i][comp->j_b] = ft_memalloc(sizeof(char) * 5);
+		files[comp->i][comp->j_b] = malloc(sizeof(char) * 5);
 		comp->k = 3;
 		while (buff[comp->i_b] != '\n' && buff[comp->i_b])
 			files[comp->i][comp->j_b][comp->k--] = buff[comp->i_b--];

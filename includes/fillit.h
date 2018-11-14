@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/26 13:00:29 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/29 15:59:59 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/14 20:07:27 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -80,6 +80,9 @@ void				set_pos(t_tetri *tetri, char **grid,
 void				to_letter(char **grid, t_tetri *tetri, t_shape **shape);
 int					ft_put(char **grid, char *shape, t_tetri *tetri);
 int					get_checker(char **tab);
+void				ft_free2d(char **tab);
+void				ft_free3d(char ***tab);
+void				ft_free_lst(t_shape **shape);
 
 # define BUFF_SIZE 21
 

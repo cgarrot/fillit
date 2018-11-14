@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/26 12:56:23 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/29 17:15:41 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/14 20:05:54 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -113,13 +113,14 @@ int		res_algo(int c_blocks, t_shape **shape)
 	while (!(search_algo(grid, tetri, 0, shape)))
 	{
 		tetri->size++;
+		ft_free2d(grid);
 		grid = init_grid(tetri->size);
 		tetri->curr_block = 0;
 	}
 	to_letter(grid, tetri, shape);
 	print_grid(grid);
-	free(shape);
+	ft_free_lst(shape);
 	free(tetri);
-	ft_strdel(grid);
+	ft_free2d(grid);
 	return (0);
 }

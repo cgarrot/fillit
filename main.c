@@ -6,7 +6,7 @@
 /*   By: thbrouss <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/24 17:59:57 by thbrouss     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/29 18:20:01 by thbrouss    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/14 20:30:19 by cgarrot     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,8 @@ int				main(int ac, char **av)
 	int		c_blocks;
 
 	c_blocks = 0;
-	files = malloc(sizeof(char**) * 27);
+	if (!(files = malloc(sizeof(char**) * 27)))
+		return (0);
 	if (ac != 2)
 		write(1, "usage /fillit [file]\n", 21);
 	else
@@ -37,5 +38,6 @@ int				main(int ac, char **av)
 			return (0);
 		}
 		res_algo(c_blocks, store_pattern(files));
+		ft_free3d(files);
 	}
 }
